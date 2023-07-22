@@ -20,23 +20,33 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/ettle/strcase"
-	"github.com/pulumi/pulumi/sdk/v3/go/common/tokens"
-	"github.com/pulumi/pulumi/sdk/v3/go/common/util/contract"
+	"github.com/MaienM/pulumi-lidarr/provider/pkg/version"
 	shimprovider "github.com/devopsarr/terraform-provider-lidarr/shim"
+	"github.com/ettle/strcase"
 	pf "github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
-	"github.com/MaienM/pulumi-lidarr/provider/pkg/version"
+	"github.com/pulumi/pulumi/sdk/v3/go/common/tokens"
+	"github.com/pulumi/pulumi/sdk/v3/go/common/util/contract"
 )
 
 //go:embed cmd/pulumi-resource-lidarr/bridge-metadata.json
 var bridgeMetadata []byte
 
-
 // all of the token components used below.
 const (
 	// This variable controls the default name of the package in the package
-	mainMod = "index" // the lidarr module
+	mainMod            = "index" // the lidarr module
+	modArtists         = "Artists"
+	modDownloadClients = "DownloadClient"
+	modImportLists     = "ImportLists"
+	modIndexers        = "Indexers"
+	modLanguages       = "Languages"
+	modMediaManagement = "MediaManagement"
+	modMetadata        = "Metadata"
+	modNotifications   = "Notifications"
+	modProfiles        = "Profiles"
+	modStatus          = "Status"
+	modTags            = "Tags"
 )
 
 func convertName(name string) string {
@@ -56,13 +66,15 @@ func makeResource(mod string, res string) tokens.Type {
 	return tfbridge.MakeResource("lidarr", mod, convertName(res))
 }
 
-
-
 // Provider returns additional overlaid schema and metadata associated with the provider..
-func Provider() pf.ProviderInfo {
-// Create a Pulumi provider mapping
-	prov := tfbridge.ProviderInfo{
+func Provider() tfbridge.ProviderInfo {
+	// Instantiate the Terraform provider
+	p := pf.ShimProvider(shimprovider.NewProvider(version.Version)())
+
+	// Create a Pulumi provider mapping
+	return tfbridge.ProviderInfo{
 		Name: "lidarr",
+		P:    p,
 		// DisplayName is a way to be able to change the casing of the provider
 		// name when being displayed on the Pulumi registry
 		DisplayName: "lidarr",
@@ -85,7 +97,7 @@ func Provider() pf.ProviderInfo {
 		// category/cloud tag helps with categorizing the package in the Pulumi Registry.
 		// For all available categories, see `Keywords` in
 		// https://www.pulumi.com/docs/guides/pulumi-packages/schema/#package.
-		Keywords:   []string{
+		Keywords: []string{
 			"pulumi",
 			"lidarr",
 			"category/infrastructure",
@@ -95,10 +107,10 @@ func Provider() pf.ProviderInfo {
 		Repository: "https://github.com/MaienM/pulumi-lidarr",
 		// The GitHub Org for the provider - defaults to `terraform-providers`. Note that this
 		// should match the TF provider module's require directive, not any replace directives.
-		Version:   version.Version,
-		GitHubOrg: "devopsarr",
+		Version:      version.Version,
+		GitHubOrg:    "devopsarr",
 		MetadataInfo: tfbridge.NewProviderMetadata(bridgeMetadata),
-		Config:    map[string]*tfbridge.SchemaInfo{
+		Config:       map[string]*tfbridge.SchemaInfo{
 			// Add any required configuration here, or remove the example below if
 			// no additional points are required.
 			// "region": {
@@ -108,24 +120,161 @@ func Provider() pf.ProviderInfo {
 			// 	},
 			// },
 		},
-		Resources:            map[string]*tfbridge.ResourceInfo{
-			// Map each resource in the Terraform provider to a Pulumi type. Two examples
-			// are below - the single line form is the common case. The multi-line form is
-			// needed only if you wish to override types or other default options.
-			//
-			// "aws_iam_role": {Tok: makeResource(mainMod(mainMod, "aws_iam_role")}
-			//
-			// "aws_acm_certificate": {
-			// 	Tok: Tok: makeResource(mainMod(mainMod, "aws_acm_certificate"),
-			// 	Fields: map[string]*tfbridge.SchemaInfo{
-			// 		"tags": {Type: tfbridge.MakeType("lidarr", "Tags")},
-			// 	},
-			// },
+		Resources: map[string]*tfbridge.ResourceInfo{
+			"lidarr_artist": {Tok: makeResource(modArtists, "lidarr_artist")},
+
+			"lidarr_download_client":                          {Tok: makeResource(modDownloadClients, "lidarr_download_client")},
+			"lidarr_download_client_aria2":                    {Tok: makeResource(modDownloadClients, "lidarr_download_client_aria2")},
+			"lidarr_download_client_config":                   {Tok: makeResource(modDownloadClients, "lidarr_download_client_config")},
+			"lidarr_download_client_deluge":                   {Tok: makeResource(modDownloadClients, "lidarr_download_client_deluge")},
+			"lidarr_download_client_flood":                    {Tok: makeResource(modDownloadClients, "lidarr_download_client_flood")},
+			"lidarr_download_client_hadouken":                 {Tok: makeResource(modDownloadClients, "lidarr_download_client_hadouken")},
+			"lidarr_download_client_nzbget":                   {Tok: makeResource(modDownloadClients, "lidarr_download_client_nzbget")},
+			"lidarr_download_client_nzbvortex":                {Tok: makeResource(modDownloadClients, "lidarr_download_client_nzbvortex")},
+			"lidarr_download_client_pneumatic":                {Tok: makeResource(modDownloadClients, "lidarr_download_client_pneumatic")},
+			"lidarr_download_client_qbittorrent":              {Tok: makeResource(modDownloadClients, "lidarr_download_client_qbittorrent")},
+			"lidarr_download_client_rtorrent":                 {Tok: makeResource(modDownloadClients, "lidarr_download_client_rtorrent")},
+			"lidarr_download_client_sabnzbd":                  {Tok: makeResource(modDownloadClients, "lidarr_download_client_sabnzbd")},
+			"lidarr_download_client_torrent_blackhole":        {Tok: makeResource(modDownloadClients, "lidarr_download_client_torrent_blackhole")},
+			"lidarr_download_client_torrent_download_station": {Tok: makeResource(modDownloadClients, "lidarr_download_client_torrent_download_station")},
+			"lidarr_download_client_transmission":             {Tok: makeResource(modDownloadClients, "lidarr_download_client_transmission")},
+			"lidarr_download_client_usenet_blackhole":         {Tok: makeResource(modDownloadClients, "lidarr_download_client_usenet_blackhole")},
+			"lidarr_download_client_usenet_download_station":  {Tok: makeResource(modDownloadClients, "lidarr_download_client_usenet_download_station")},
+			"lidarr_download_client_utorrent":                 {Tok: makeResource(modDownloadClients, "lidarr_download_client_utorrent")},
+			"lidarr_download_client_vuze":                     {Tok: makeResource(modDownloadClients, "lidarr_download_client_vuze")},
+			"lidarr_remote_path_mapping":                      {Tok: makeResource(modDownloadClients, "lidarr_remote_path_mapping")},
+
+			"lidarr_import_list":                   {Tok: makeResource(modImportLists, "lidarr_import_list")},
+			"lidarr_import_list_exclusion":         {Tok: makeResource(modImportLists, "lidarr_import_list_exclusion")},
+			"lidarr_import_list_headphones":        {Tok: makeResource(modImportLists, "lidarr_import_list_headphones")},
+			"lidarr_import_list_lastfm_tag":        {Tok: makeResource(modImportLists, "lidarr_import_list_lastfm_tag")},
+			"lidarr_import_list_lastfm_user":       {Tok: makeResource(modImportLists, "lidarr_import_list_lastfm_user")},
+			"lidarr_import_list_lidarr":            {Tok: makeResource(modImportLists, "lidarr_import_list_lidarr")},
+			"lidarr_import_list_lidarr_list":       {Tok: makeResource(modImportLists, "lidarr_import_list_lidarr_list")},
+			"lidarr_import_list_music_brainz":      {Tok: makeResource(modImportLists, "lidarr_import_list_music_brainz")},
+			"lidarr_import_list_spotify_albums":    {Tok: makeResource(modImportLists, "lidarr_import_list_spotify_albums")},
+			"lidarr_import_list_spotify_artists":   {Tok: makeResource(modImportLists, "lidarr_import_list_spotify_artists")},
+			"lidarr_import_list_spotify_playlists": {Tok: makeResource(modImportLists, "lidarr_import_list_spotify_playlists")},
+
+			"lidarr_indexer":              {Tok: makeResource(modIndexers, "lidarr_indexer")},
+			"lidarr_indexer_config":       {Tok: makeResource(modIndexers, "lidarr_indexer_config")},
+			"lidarr_indexer_filelist":     {Tok: makeResource(modIndexers, "lidarr_indexer_filelist")},
+			"lidarr_indexer_gazelle":      {Tok: makeResource(modIndexers, "lidarr_indexer_gazelle")},
+			"lidarr_indexer_headphones":   {Tok: makeResource(modIndexers, "lidarr_indexer_headphones")},
+			"lidarr_indexer_iptorrents":   {Tok: makeResource(modIndexers, "lidarr_indexer_iptorrents")},
+			"lidarr_indexer_newznab":      {Tok: makeResource(modIndexers, "lidarr_indexer_newznab")},
+			"lidarr_indexer_nyaa":         {Tok: makeResource(modIndexers, "lidarr_indexer_nyaa")},
+			"lidarr_indexer_rarbg":        {Tok: makeResource(modIndexers, "lidarr_indexer_rarbg")},
+			"lidarr_indexer_redacted":     {Tok: makeResource(modIndexers, "lidarr_indexer_redacted")},
+			"lidarr_indexer_torrent_rss":  {Tok: makeResource(modIndexers, "lidarr_indexer_torrent_rss")},
+			"lidarr_indexer_torrentleech": {Tok: makeResource(modIndexers, "lidarr_indexer_torrentleech")},
+			"lidarr_indexer_torznab":      {Tok: makeResource(modIndexers, "lidarr_indexer_torznab")},
+
+			"lidarr_media_management": {Tok: makeResource(modMediaManagement, "lidarr_media_management")},
+			"lidarr_naming":           {Tok: makeResource(modMediaManagement, "lidarr_naming")},
+			"lidarr_root_folder":      {Tok: makeResource(modMediaManagement, "lidarr_root_folder")},
+
+			"lidarr_metadata":         {Tok: makeResource(modMetadata, "lidarr_metadata")},
+			"lidarr_metadata_config":  {Tok: makeResource(modMetadata, "lidarr_metadata_config")},
+			"lidarr_metadata_kodi":    {Tok: makeResource(modMetadata, "lidarr_metadata_kodi")},
+			"lidarr_metadata_roksbox": {Tok: makeResource(modMetadata, "lidarr_metadata_roksbox")},
+			"lidarr_metadata_wdtv":    {Tok: makeResource(modMetadata, "lidarr_metadata_wdtv")},
+
+			"lidarr_notification":                  {Tok: makeResource(modNotifications, "lidarr_notification")},
+			"lidarr_notification_apprise":          {Tok: makeResource(modNotifications, "lidarr_notification_apprise")},
+			"lidarr_notification_boxcar":           {Tok: makeResource(modNotifications, "lidarr_notification_boxcar")},
+			"lidarr_notification_custom_script":    {Tok: makeResource(modNotifications, "lidarr_notification_custom_script")},
+			"lidarr_notification_discord":          {Tok: makeResource(modNotifications, "lidarr_notification_discord")},
+			"lidarr_notification_email":            {Tok: makeResource(modNotifications, "lidarr_notification_email")},
+			"lidarr_notification_emby":             {Tok: makeResource(modNotifications, "lidarr_notification_emby")},
+			"lidarr_notification_gotify":           {Tok: makeResource(modNotifications, "lidarr_notification_gotify")},
+			"lidarr_notification_join":             {Tok: makeResource(modNotifications, "lidarr_notification_join")},
+			"lidarr_notification_kodi":             {Tok: makeResource(modNotifications, "lidarr_notification_kodi")},
+			"lidarr_notification_mailgun":          {Tok: makeResource(modNotifications, "lidarr_notification_mailgun")},
+			"lidarr_notification_notifiarr":        {Tok: makeResource(modNotifications, "lidarr_notification_notifiarr")},
+			"lidarr_notification_ntfy":             {Tok: makeResource(modNotifications, "lidarr_notification_ntfy")},
+			"lidarr_notification_plex":             {Tok: makeResource(modNotifications, "lidarr_notification_plex")},
+			"lidarr_notification_prowl":            {Tok: makeResource(modNotifications, "lidarr_notification_prowl")},
+			"lidarr_notification_pushbullet":       {Tok: makeResource(modNotifications, "lidarr_notification_pushbullet")},
+			"lidarr_notification_pushover":         {Tok: makeResource(modNotifications, "lidarr_notification_pushover")},
+			"lidarr_notification_sendgrid":         {Tok: makeResource(modNotifications, "lidarr_notification_sendgrid")},
+			"lidarr_notification_signal":           {Tok: makeResource(modNotifications, "lidarr_notification_signal")},
+			"lidarr_notification_simplepush":       {Tok: makeResource(modNotifications, "lidarr_notification_simplepush")},
+			"lidarr_notification_slack":            {Tok: makeResource(modNotifications, "lidarr_notification_slack")},
+			"lidarr_notification_subsonic":         {Tok: makeResource(modNotifications, "lidarr_notification_subsonic")},
+			"lidarr_notification_synology_indexer": {Tok: makeResource(modNotifications, "lidarr_notification_synology_indexer")},
+			"lidarr_notification_telegram":         {Tok: makeResource(modNotifications, "lidarr_notification_telegram")},
+			"lidarr_notification_twitter":          {Tok: makeResource(modNotifications, "lidarr_notification_twitter")},
+			"lidarr_notification_webhook":          {Tok: makeResource(modNotifications, "lidarr_notification_webhook")},
+
+			"lidarr_custom_format":      {Tok: makeResource(modProfiles, "lidarr_custom_format")},
+			"lidarr_delay_profile":      {Tok: makeResource(modProfiles, "lidarr_delay_profile")},
+			"lidarr_metadata_profile":   {Tok: makeResource(modProfiles, "lidarr_metadata_profile")},
+			"lidarr_quality_definition": {Tok: makeResource(modProfiles, "lidarr_quality_definition")},
+			"lidarr_quality_profile":    {Tok: makeResource(modProfiles, "lidarr_quality_profile")},
+			"lidarr_release_profile":    {Tok: makeResource(modProfiles, "lidarr_release_profile")},
+
+			"lidarr_tag": {Tok: makeResource(modTags, "lidarr_tag")},
 		},
 		DataSources: map[string]*tfbridge.DataSourceInfo{
-			// Map each resource in the Terraform provider to a Pulumi function. An example
-			// is below.
-			// "aws_ami": {Tok: makeDataSource(mainMod, "aws_ami")},
+			"lidarr_artist":  {Tok: makeDataSource(modArtists, "lidarr_artist")},
+			"lidarr_artists": {Tok: makeDataSource(modArtists, "lidarr_artists")},
+
+			"lidarr_download_client":        {Tok: makeDataSource(modDownloadClients, "lidarr_download_client")},
+			"lidarr_download_client_config": {Tok: makeDataSource(modDownloadClients, "lidarr_download_client_config")},
+			"lidarr_download_clients":       {Tok: makeDataSource(modDownloadClients, "lidarr_download_clients")},
+			"lidarr_remote_path_mapping":    {Tok: makeDataSource(modDownloadClients, "lidarr_remote_path_mapping")},
+			"lidarr_remote_path_mappings":   {Tok: makeDataSource(modDownloadClients, "lidarr_remote_path_mappings")},
+
+			"lidarr_import_list":            {Tok: makeDataSource(modImportLists, "lidarr_import_list")},
+			"lidarr_import_list_exclusion":  {Tok: makeDataSource(modImportLists, "lidarr_import_list_exclusion")},
+			"lidarr_import_list_exclusions": {Tok: makeDataSource(modImportLists, "lidarr_import_list_exclusions")},
+			"lidarr_import_lists":           {Tok: makeDataSource(modImportLists, "lidarr_import_lists")},
+
+			"lidarr_indexer":        {Tok: makeDataSource(modIndexers, "lidarr_indexer")},
+			"lidarr_indexer_config": {Tok: makeDataSource(modIndexers, "lidarr_indexer_config")},
+			"lidarr_indexers":       {Tok: makeDataSource(modIndexers, "lidarr_indexers")},
+
+			"lidarr_media_management": {Tok: makeDataSource(modMediaManagement, "lidarr_media_management")},
+			"lidarr_naming":           {Tok: makeDataSource(modMediaManagement, "lidarr_naming")},
+			"lidarr_root_folder":      {Tok: makeDataSource(modMediaManagement, "lidarr_root_folder")},
+			"lidarr_root_folders":     {Tok: makeDataSource(modMediaManagement, "lidarr_root_folders")},
+
+			"lidarr_metadata":           {Tok: makeDataSource(modMetadata, "lidarr_metadata")},
+			"lidarr_metadata_config":    {Tok: makeDataSource(modMetadata, "lidarr_metadata_config")},
+			"lidarr_metadata_consumers": {Tok: makeDataSource(modMetadata, "lidarr_metadata_consumers")},
+
+			"lidarr_notification":  {Tok: makeDataSource(modNotifications, "lidarr_notification")},
+			"lidarr_notifications": {Tok: makeDataSource(modNotifications, "lidarr_notifications")},
+
+			"lidarr_custom_format":                         {Tok: makeDataSource(modProfiles, "lidarr_custom_format")},
+			"lidarr_custom_format_condition":               {Tok: makeDataSource(modProfiles, "lidarr_custom_format_condition")},
+			"lidarr_custom_format_condition_release_group": {Tok: makeDataSource(modProfiles, "lidarr_custom_format_condition_release_group")},
+			"lidarr_custom_format_condition_release_title": {Tok: makeDataSource(modProfiles, "lidarr_custom_format_condition_release_title")},
+			"lidarr_custom_format_condition_size":          {Tok: makeDataSource(modProfiles, "lidarr_custom_format_condition_size")},
+			"lidarr_custom_formats":                        {Tok: makeDataSource(modProfiles, "lidarr_custom_formats")},
+			"lidarr_delay_profile":                         {Tok: makeDataSource(modProfiles, "lidarr_delay_profile")},
+			"lidarr_delay_profiles":                        {Tok: makeDataSource(modProfiles, "lidarr_delay_profiles")},
+			"lidarr_metadata_profile":                      {Tok: makeDataSource(modProfiles, "lidarr_metadata_profile")},
+			"lidarr_metadata_profiles":                     {Tok: makeDataSource(modProfiles, "lidarr_metadata_profiles")},
+			"lidarr_primary_album_type":                    {Tok: makeDataSource(modProfiles, "lidarr_primary_album_type")},
+			"lidarr_primary_album_types":                   {Tok: makeDataSource(modProfiles, "lidarr_primary_album_types")},
+			"lidarr_quality":                               {Tok: makeDataSource(modProfiles, "lidarr_quality")},
+			"lidarr_quality_definition":                    {Tok: makeDataSource(modProfiles, "lidarr_quality_definition")},
+			"lidarr_quality_definitions":                   {Tok: makeDataSource(modProfiles, "lidarr_quality_definitions")},
+			"lidarr_quality_profile":                       {Tok: makeDataSource(modProfiles, "lidarr_quality_profile")},
+			"lidarr_quality_profiles":                      {Tok: makeDataSource(modProfiles, "lidarr_quality_profiles")},
+			"lidarr_release_profile":                       {Tok: makeDataSource(modProfiles, "lidarr_release_profile")},
+			"lidarr_release_profiles":                      {Tok: makeDataSource(modProfiles, "lidarr_release_profiles")},
+			"lidarr_release_status":                        {Tok: makeDataSource(modProfiles, "lidarr_release_status")},
+			"lidarr_release_statuses":                      {Tok: makeDataSource(modProfiles, "lidarr_release_statuses")},
+			"lidarr_secondary_album_type":                  {Tok: makeDataSource(modProfiles, "lidarr_secondary_album_type")},
+			"lidarr_secondary_album_types":                 {Tok: makeDataSource(modProfiles, "lidarr_secondary_album_types")},
+
+			"lidarr_system_status": {Tok: makeDataSource(modStatus, "lidarr_system_status")},
+
+			"lidarr_tag":  {Tok: makeDataSource(modTags, "lidarr_tag")},
+			"lidarr_tags": {Tok: makeDataSource(modTags, "lidarr_tags")},
 		},
 		JavaScript: &tfbridge.JavaScriptInfo{
 			PackageName: "@maienm/pulumi-lidarr",
@@ -171,9 +320,4 @@ func Provider() pf.ProviderInfo {
 			BasePackage: "com.maienm",
 		},
 	}
-
-
-	return pf.ProviderInfo{
-		ProviderInfo: prov,
-		NewProvider:  shimprovider.NewProvider(),}
 }
