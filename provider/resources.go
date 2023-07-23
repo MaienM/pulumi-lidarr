@@ -40,7 +40,6 @@ const (
 	modDownloadClients = "DownloadClient"
 	modImportLists     = "ImportLists"
 	modIndexers        = "Indexers"
-	modLanguages       = "Languages"
 	modMediaManagement = "MediaManagement"
 	modMetadata        = "Metadata"
 	modNotifications   = "Notifications"
