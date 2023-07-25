@@ -5,8 +5,8 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 /**
- * <!-- subcategory:Download Clients -->Download Client Sabnzbd resource.
- * For more information refer to [Download Client](https://wiki.servarr.com/lidarr/settings#download-clients) and [Sabnzbd](https://wiki.servarr.com/lidarr/supported#sabnzbd).
+ * <!-- subcategory:Download Clients -->Download Client UsenetDownloadStation resource.
+ * For more information refer to [Download Client](https://wiki.servarr.com/lidarr/settings#download-clients) and [UsenetDownloadStation](https://wiki.servarr.com/lidarr/supported#usenetdownloadstation).
  *
  * ## Example Usage
  *
@@ -14,14 +14,12 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as lidarr from "@maienm/pulumi-lidarr";
  *
- * const example = new lidarr.downloadclient.DownloadClientSabnzbd("example", {
- *     apiKey: "example",
+ * const example = new lidarr.downloadclients.DownloadClientUsenetDownloadStation("example", {
  *     enable: true,
- *     host: "sabnzbd",
+ *     host: "downloadstation",
  *     name: "Example",
- *     port: 9091,
+ *     port: 5000,
  *     priority: 1,
- *     urlBase: "/sabnzbd/",
  * });
  * ```
  *
@@ -30,12 +28,12 @@ import * as utilities from "../utilities";
  * import using the API/UI ID
  *
  * ```sh
- *  $ pulumi import lidarr:DownloadClient/downloadClientSabnzbd:DownloadClientSabnzbd example 1
+ *  $ pulumi import lidarr:DownloadClients/downloadClientUsenetDownloadStation:DownloadClientUsenetDownloadStation example 1
  * ```
  */
-export class DownloadClientSabnzbd extends pulumi.CustomResource {
+export class DownloadClientUsenetDownloadStation extends pulumi.CustomResource {
     /**
-     * Get an existing DownloadClientSabnzbd resource's state with the given name, ID, and optional extra
+     * Get an existing DownloadClientUsenetDownloadStation resource's state with the given name, ID, and optional extra
      * properties used to qualify the lookup.
      *
      * @param name The _unique_ name of the resulting resource.
@@ -43,28 +41,24 @@ export class DownloadClientSabnzbd extends pulumi.CustomResource {
      * @param state Any extra arguments used during the lookup.
      * @param opts Optional settings to control the behavior of the CustomResource.
      */
-    public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: DownloadClientSabnzbdState, opts?: pulumi.CustomResourceOptions): DownloadClientSabnzbd {
-        return new DownloadClientSabnzbd(name, <any>state, { ...opts, id: id });
+    public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: DownloadClientUsenetDownloadStationState, opts?: pulumi.CustomResourceOptions): DownloadClientUsenetDownloadStation {
+        return new DownloadClientUsenetDownloadStation(name, <any>state, { ...opts, id: id });
     }
 
     /** @internal */
-    public static readonly __pulumiType = 'lidarr:DownloadClient/downloadClientSabnzbd:DownloadClientSabnzbd';
+    public static readonly __pulumiType = 'lidarr:DownloadClients/downloadClientUsenetDownloadStation:DownloadClientUsenetDownloadStation';
 
     /**
-     * Returns true if the given object is an instance of DownloadClientSabnzbd.  This is designed to work even
+     * Returns true if the given object is an instance of DownloadClientUsenetDownloadStation.  This is designed to work even
      * when multiple copies of the Pulumi SDK have been loaded into the same process.
      */
-    public static isInstance(obj: any): obj is DownloadClientSabnzbd {
+    public static isInstance(obj: any): obj is DownloadClientUsenetDownloadStation {
         if (obj === undefined || obj === null) {
             return false;
         }
-        return obj['__pulumiType'] === DownloadClientSabnzbd.__pulumiType;
+        return obj['__pulumiType'] === DownloadClientUsenetDownloadStation.__pulumiType;
     }
 
-    /**
-     * API key.
-     */
-    public readonly apiKey!: pulumi.Output<string>;
     /**
      * Enable flag.
      */
@@ -78,13 +72,13 @@ export class DownloadClientSabnzbd extends pulumi.CustomResource {
      */
     public readonly musicCategory!: pulumi.Output<string>;
     /**
+     * Music directory.
+     */
+    public readonly musicDirectory!: pulumi.Output<string>;
+    /**
      * Download Client name.
      */
     public readonly name!: pulumi.Output<string>;
-    /**
-     * Older Music priority. `-100` Default, `-2` Paused, `-1` Low, `0` Normal, `1` High, `2` Force.
-     */
-    public readonly olderMusicPriority!: pulumi.Output<number>;
     /**
      * Password.
      */
@@ -98,10 +92,6 @@ export class DownloadClientSabnzbd extends pulumi.CustomResource {
      */
     public readonly priority!: pulumi.Output<number>;
     /**
-     * Recent Music priority. `-100` Default, `-2` Paused, `-1` Low, `0` Normal, `1` High, `2` Force.
-     */
-    public readonly recentMusicPriority!: pulumi.Output<number>;
-    /**
      * Remove completed downloads flag.
      */
     public readonly removeCompletedDownloads!: pulumi.Output<boolean>;
@@ -114,10 +104,6 @@ export class DownloadClientSabnzbd extends pulumi.CustomResource {
      */
     public readonly tags!: pulumi.Output<number[]>;
     /**
-     * Base URL.
-     */
-    public readonly urlBase!: pulumi.Output<string>;
-    /**
      * Use SSL flag.
      */
     public readonly useSsl!: pulumi.Output<boolean>;
@@ -127,71 +113,61 @@ export class DownloadClientSabnzbd extends pulumi.CustomResource {
     public readonly username!: pulumi.Output<string>;
 
     /**
-     * Create a DownloadClientSabnzbd resource with the given unique name, arguments, and options.
+     * Create a DownloadClientUsenetDownloadStation resource with the given unique name, arguments, and options.
      *
      * @param name The _unique_ name of the resource.
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args: DownloadClientSabnzbdArgs, opts?: pulumi.CustomResourceOptions)
-    constructor(name: string, argsOrState?: DownloadClientSabnzbdArgs | DownloadClientSabnzbdState, opts?: pulumi.CustomResourceOptions) {
+    constructor(name: string, args: DownloadClientUsenetDownloadStationArgs, opts?: pulumi.CustomResourceOptions)
+    constructor(name: string, argsOrState?: DownloadClientUsenetDownloadStationArgs | DownloadClientUsenetDownloadStationState, opts?: pulumi.CustomResourceOptions) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {
-            const state = argsOrState as DownloadClientSabnzbdState | undefined;
-            resourceInputs["apiKey"] = state ? state.apiKey : undefined;
+            const state = argsOrState as DownloadClientUsenetDownloadStationState | undefined;
             resourceInputs["enable"] = state ? state.enable : undefined;
             resourceInputs["host"] = state ? state.host : undefined;
             resourceInputs["musicCategory"] = state ? state.musicCategory : undefined;
+            resourceInputs["musicDirectory"] = state ? state.musicDirectory : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
-            resourceInputs["olderMusicPriority"] = state ? state.olderMusicPriority : undefined;
             resourceInputs["password"] = state ? state.password : undefined;
             resourceInputs["port"] = state ? state.port : undefined;
             resourceInputs["priority"] = state ? state.priority : undefined;
-            resourceInputs["recentMusicPriority"] = state ? state.recentMusicPriority : undefined;
             resourceInputs["removeCompletedDownloads"] = state ? state.removeCompletedDownloads : undefined;
             resourceInputs["removeFailedDownloads"] = state ? state.removeFailedDownloads : undefined;
             resourceInputs["tags"] = state ? state.tags : undefined;
-            resourceInputs["urlBase"] = state ? state.urlBase : undefined;
             resourceInputs["useSsl"] = state ? state.useSsl : undefined;
             resourceInputs["username"] = state ? state.username : undefined;
         } else {
-            const args = argsOrState as DownloadClientSabnzbdArgs | undefined;
+            const args = argsOrState as DownloadClientUsenetDownloadStationArgs | undefined;
             if ((!args || args.name === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'name'");
             }
-            resourceInputs["apiKey"] = args?.apiKey ? pulumi.secret(args.apiKey) : undefined;
             resourceInputs["enable"] = args ? args.enable : undefined;
             resourceInputs["host"] = args ? args.host : undefined;
             resourceInputs["musicCategory"] = args ? args.musicCategory : undefined;
+            resourceInputs["musicDirectory"] = args ? args.musicDirectory : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
-            resourceInputs["olderMusicPriority"] = args ? args.olderMusicPriority : undefined;
             resourceInputs["password"] = args?.password ? pulumi.secret(args.password) : undefined;
             resourceInputs["port"] = args ? args.port : undefined;
             resourceInputs["priority"] = args ? args.priority : undefined;
-            resourceInputs["recentMusicPriority"] = args ? args.recentMusicPriority : undefined;
             resourceInputs["removeCompletedDownloads"] = args ? args.removeCompletedDownloads : undefined;
             resourceInputs["removeFailedDownloads"] = args ? args.removeFailedDownloads : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
-            resourceInputs["urlBase"] = args ? args.urlBase : undefined;
             resourceInputs["useSsl"] = args ? args.useSsl : undefined;
             resourceInputs["username"] = args ? args.username : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
-        const secretOpts = { additionalSecretOutputs: ["apiKey", "password"] };
+        const secretOpts = { additionalSecretOutputs: ["password"] };
         opts = pulumi.mergeOptions(opts, secretOpts);
-        super(DownloadClientSabnzbd.__pulumiType, name, resourceInputs, opts);
+        super(DownloadClientUsenetDownloadStation.__pulumiType, name, resourceInputs, opts);
     }
 }
 
 /**
- * Input properties used for looking up and filtering DownloadClientSabnzbd resources.
+ * Input properties used for looking up and filtering DownloadClientUsenetDownloadStation resources.
  */
-export interface DownloadClientSabnzbdState {
-    /**
-     * API key.
-     */
-    apiKey?: pulumi.Input<string>;
+export interface DownloadClientUsenetDownloadStationState {
     /**
      * Enable flag.
      */
@@ -205,13 +181,13 @@ export interface DownloadClientSabnzbdState {
      */
     musicCategory?: pulumi.Input<string>;
     /**
+     * Music directory.
+     */
+    musicDirectory?: pulumi.Input<string>;
+    /**
      * Download Client name.
      */
     name?: pulumi.Input<string>;
-    /**
-     * Older Music priority. `-100` Default, `-2` Paused, `-1` Low, `0` Normal, `1` High, `2` Force.
-     */
-    olderMusicPriority?: pulumi.Input<number>;
     /**
      * Password.
      */
@@ -225,10 +201,6 @@ export interface DownloadClientSabnzbdState {
      */
     priority?: pulumi.Input<number>;
     /**
-     * Recent Music priority. `-100` Default, `-2` Paused, `-1` Low, `0` Normal, `1` High, `2` Force.
-     */
-    recentMusicPriority?: pulumi.Input<number>;
-    /**
      * Remove completed downloads flag.
      */
     removeCompletedDownloads?: pulumi.Input<boolean>;
@@ -240,10 +212,6 @@ export interface DownloadClientSabnzbdState {
      * List of associated tags.
      */
     tags?: pulumi.Input<pulumi.Input<number>[]>;
-    /**
-     * Base URL.
-     */
-    urlBase?: pulumi.Input<string>;
     /**
      * Use SSL flag.
      */
@@ -255,13 +223,9 @@ export interface DownloadClientSabnzbdState {
 }
 
 /**
- * The set of arguments for constructing a DownloadClientSabnzbd resource.
+ * The set of arguments for constructing a DownloadClientUsenetDownloadStation resource.
  */
-export interface DownloadClientSabnzbdArgs {
-    /**
-     * API key.
-     */
-    apiKey?: pulumi.Input<string>;
+export interface DownloadClientUsenetDownloadStationArgs {
     /**
      * Enable flag.
      */
@@ -275,13 +239,13 @@ export interface DownloadClientSabnzbdArgs {
      */
     musicCategory?: pulumi.Input<string>;
     /**
+     * Music directory.
+     */
+    musicDirectory?: pulumi.Input<string>;
+    /**
      * Download Client name.
      */
     name: pulumi.Input<string>;
-    /**
-     * Older Music priority. `-100` Default, `-2` Paused, `-1` Low, `0` Normal, `1` High, `2` Force.
-     */
-    olderMusicPriority?: pulumi.Input<number>;
     /**
      * Password.
      */
@@ -295,10 +259,6 @@ export interface DownloadClientSabnzbdArgs {
      */
     priority?: pulumi.Input<number>;
     /**
-     * Recent Music priority. `-100` Default, `-2` Paused, `-1` Low, `0` Normal, `1` High, `2` Force.
-     */
-    recentMusicPriority?: pulumi.Input<number>;
-    /**
      * Remove completed downloads flag.
      */
     removeCompletedDownloads?: pulumi.Input<boolean>;
@@ -310,10 +270,6 @@ export interface DownloadClientSabnzbdArgs {
      * List of associated tags.
      */
     tags?: pulumi.Input<pulumi.Input<number>[]>;
-    /**
-     * Base URL.
-     */
-    urlBase?: pulumi.Input<string>;
     /**
      * Use SSL flag.
      */

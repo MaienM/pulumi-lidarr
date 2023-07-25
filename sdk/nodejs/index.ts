@@ -14,7 +14,7 @@ utilities.lazyLoad(exports, ["Provider"], () => require("./provider"));
 // Export sub-modules:
 import * as artists from "./artists";
 import * as config from "./config";
-import * as downloadclient from "./downloadclient";
+import * as downloadclients from "./downloadclients";
 import * as importlists from "./importlists";
 import * as indexers from "./indexers";
 import * as mediamanagement from "./mediamanagement";
@@ -28,7 +28,7 @@ import * as types from "./types";
 export {
     artists,
     config,
-    downloadclient,
+    downloadclients,
     importlists,
     indexers,
     mediamanagement,

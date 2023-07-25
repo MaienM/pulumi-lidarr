@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import does not need parameters
  *
  * ```sh
- *  $ pulumi import lidarr:DownloadClient/downloadClientConfig:DownloadClientConfig example
+ *  $ pulumi import lidarr:DownloadClients/downloadClientConfig:DownloadClientConfig example
  * ```
  */
 export class DownloadClientConfig extends pulumi.CustomResource {
@@ -31,7 +31,7 @@ export class DownloadClientConfig extends pulumi.CustomResource {
     }
 
     /** @internal */
-    public static readonly __pulumiType = 'lidarr:DownloadClient/downloadClientConfig:DownloadClientConfig';
+    public static readonly __pulumiType = 'lidarr:DownloadClients/downloadClientConfig:DownloadClientConfig';
 
     /**
      * Returns true if the given object is an instance of DownloadClientConfig.  This is designed to work even

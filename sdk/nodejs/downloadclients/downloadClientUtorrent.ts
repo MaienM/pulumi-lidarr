@@ -5,8 +5,8 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 /**
- * <!-- subcategory:Download Clients -->Download Client TorrentDownloadStation resource.
- * For more information refer to [Download Client](https://wiki.servarr.com/lidarr/settings#download-clients) and [TorrentDownloadStation](https://wiki.servarr.com/lidarr/supported#torrentdownloadstation).
+ * <!-- subcategory:Download Clients -->Download Client uTorrent resource.
+ * For more information refer to [Download Client](https://wiki.servarr.com/lidarr/settings#download-clients) and [uTorrent](https://wiki.servarr.com/lidarr/supported#utorrent).
  *
  * ## Example Usage
  *
@@ -14,12 +14,14 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as lidarr from "@maienm/pulumi-lidarr";
  *
- * const example = new lidarr.downloadclient.DownloadClientTorrentDownloadStation("example", {
+ * const example = new lidarr.downloadclients.DownloadClientUtorrent("example", {
  *     enable: true,
- *     host: "downloadstation",
+ *     host: "utorrent",
+ *     musicCategory: "tv-lidarr",
  *     name: "Example",
- *     port: 5000,
+ *     port: 9091,
  *     priority: 1,
+ *     urlBase: "/utorrent/",
  * });
  * ```
  *
@@ -28,12 +30,12 @@ import * as utilities from "../utilities";
  * import using the API/UI ID
  *
  * ```sh
- *  $ pulumi import lidarr:DownloadClient/downloadClientTorrentDownloadStation:DownloadClientTorrentDownloadStation example 1
+ *  $ pulumi import lidarr:DownloadClients/downloadClientUtorrent:DownloadClientUtorrent example 1
  * ```
  */
-export class DownloadClientTorrentDownloadStation extends pulumi.CustomResource {
+export class DownloadClientUtorrent extends pulumi.CustomResource {
     /**
-     * Get an existing DownloadClientTorrentDownloadStation resource's state with the given name, ID, and optional extra
+     * Get an existing DownloadClientUtorrent resource's state with the given name, ID, and optional extra
      * properties used to qualify the lookup.
      *
      * @param name The _unique_ name of the resulting resource.
@@ -41,22 +43,22 @@ export class DownloadClientTorrentDownloadStation extends pulumi.CustomResource 
      * @param state Any extra arguments used during the lookup.
      * @param opts Optional settings to control the behavior of the CustomResource.
      */
-    public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: DownloadClientTorrentDownloadStationState, opts?: pulumi.CustomResourceOptions): DownloadClientTorrentDownloadStation {
-        return new DownloadClientTorrentDownloadStation(name, <any>state, { ...opts, id: id });
+    public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: DownloadClientUtorrentState, opts?: pulumi.CustomResourceOptions): DownloadClientUtorrent {
+        return new DownloadClientUtorrent(name, <any>state, { ...opts, id: id });
     }
 
     /** @internal */
-    public static readonly __pulumiType = 'lidarr:DownloadClient/downloadClientTorrentDownloadStation:DownloadClientTorrentDownloadStation';
+    public static readonly __pulumiType = 'lidarr:DownloadClients/downloadClientUtorrent:DownloadClientUtorrent';
 
     /**
-     * Returns true if the given object is an instance of DownloadClientTorrentDownloadStation.  This is designed to work even
+     * Returns true if the given object is an instance of DownloadClientUtorrent.  This is designed to work even
      * when multiple copies of the Pulumi SDK have been loaded into the same process.
      */
-    public static isInstance(obj: any): obj is DownloadClientTorrentDownloadStation {
+    public static isInstance(obj: any): obj is DownloadClientUtorrent {
         if (obj === undefined || obj === null) {
             return false;
         }
-        return obj['__pulumiType'] === DownloadClientTorrentDownloadStation.__pulumiType;
+        return obj['__pulumiType'] === DownloadClientUtorrent.__pulumiType;
     }
 
     /**
@@ -68,17 +70,25 @@ export class DownloadClientTorrentDownloadStation extends pulumi.CustomResource 
      */
     public readonly host!: pulumi.Output<string>;
     /**
+     * Initial state, with Stop support. `0` Start, `1` ForceStart, `2` Pause, `3` Stop.
+     */
+    public readonly intialState!: pulumi.Output<number>;
+    /**
      * Music category.
      */
     public readonly musicCategory!: pulumi.Output<string>;
     /**
-     * Music directory.
+     * Music imported category.
      */
-    public readonly musicDirectory!: pulumi.Output<string>;
+    public readonly musicImportedCategory!: pulumi.Output<string>;
     /**
      * Download Client name.
      */
     public readonly name!: pulumi.Output<string>;
+    /**
+     * Older Music priority. `0` Last, `1` First.
+     */
+    public readonly olderMusicPriority!: pulumi.Output<number>;
     /**
      * Password.
      */
@@ -92,6 +102,10 @@ export class DownloadClientTorrentDownloadStation extends pulumi.CustomResource 
      */
     public readonly priority!: pulumi.Output<number>;
     /**
+     * Recent Music priority. `0` Last, `1` First.
+     */
+    public readonly recentMusicPriority!: pulumi.Output<number>;
+    /**
      * Remove completed downloads flag.
      */
     public readonly removeCompletedDownloads!: pulumi.Output<boolean>;
@@ -104,6 +118,10 @@ export class DownloadClientTorrentDownloadStation extends pulumi.CustomResource 
      */
     public readonly tags!: pulumi.Output<number[]>;
     /**
+     * Base URL.
+     */
+    public readonly urlBase!: pulumi.Output<string>;
+    /**
      * Use SSL flag.
      */
     public readonly useSsl!: pulumi.Output<boolean>;
@@ -113,61 +131,69 @@ export class DownloadClientTorrentDownloadStation extends pulumi.CustomResource 
     public readonly username!: pulumi.Output<string>;
 
     /**
-     * Create a DownloadClientTorrentDownloadStation resource with the given unique name, arguments, and options.
+     * Create a DownloadClientUtorrent resource with the given unique name, arguments, and options.
      *
      * @param name The _unique_ name of the resource.
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args: DownloadClientTorrentDownloadStationArgs, opts?: pulumi.CustomResourceOptions)
-    constructor(name: string, argsOrState?: DownloadClientTorrentDownloadStationArgs | DownloadClientTorrentDownloadStationState, opts?: pulumi.CustomResourceOptions) {
+    constructor(name: string, args: DownloadClientUtorrentArgs, opts?: pulumi.CustomResourceOptions)
+    constructor(name: string, argsOrState?: DownloadClientUtorrentArgs | DownloadClientUtorrentState, opts?: pulumi.CustomResourceOptions) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {
-            const state = argsOrState as DownloadClientTorrentDownloadStationState | undefined;
+            const state = argsOrState as DownloadClientUtorrentState | undefined;
             resourceInputs["enable"] = state ? state.enable : undefined;
             resourceInputs["host"] = state ? state.host : undefined;
+            resourceInputs["intialState"] = state ? state.intialState : undefined;
             resourceInputs["musicCategory"] = state ? state.musicCategory : undefined;
-            resourceInputs["musicDirectory"] = state ? state.musicDirectory : undefined;
+            resourceInputs["musicImportedCategory"] = state ? state.musicImportedCategory : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
+            resourceInputs["olderMusicPriority"] = state ? state.olderMusicPriority : undefined;
             resourceInputs["password"] = state ? state.password : undefined;
             resourceInputs["port"] = state ? state.port : undefined;
             resourceInputs["priority"] = state ? state.priority : undefined;
+            resourceInputs["recentMusicPriority"] = state ? state.recentMusicPriority : undefined;
             resourceInputs["removeCompletedDownloads"] = state ? state.removeCompletedDownloads : undefined;
             resourceInputs["removeFailedDownloads"] = state ? state.removeFailedDownloads : undefined;
             resourceInputs["tags"] = state ? state.tags : undefined;
+            resourceInputs["urlBase"] = state ? state.urlBase : undefined;
             resourceInputs["useSsl"] = state ? state.useSsl : undefined;
             resourceInputs["username"] = state ? state.username : undefined;
         } else {
-            const args = argsOrState as DownloadClientTorrentDownloadStationArgs | undefined;
+            const args = argsOrState as DownloadClientUtorrentArgs | undefined;
             if ((!args || args.name === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'name'");
             }
             resourceInputs["enable"] = args ? args.enable : undefined;
             resourceInputs["host"] = args ? args.host : undefined;
+            resourceInputs["intialState"] = args ? args.intialState : undefined;
             resourceInputs["musicCategory"] = args ? args.musicCategory : undefined;
-            resourceInputs["musicDirectory"] = args ? args.musicDirectory : undefined;
+            resourceInputs["musicImportedCategory"] = args ? args.musicImportedCategory : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["olderMusicPriority"] = args ? args.olderMusicPriority : undefined;
             resourceInputs["password"] = args?.password ? pulumi.secret(args.password) : undefined;
             resourceInputs["port"] = args ? args.port : undefined;
             resourceInputs["priority"] = args ? args.priority : undefined;
+            resourceInputs["recentMusicPriority"] = args ? args.recentMusicPriority : undefined;
             resourceInputs["removeCompletedDownloads"] = args ? args.removeCompletedDownloads : undefined;
             resourceInputs["removeFailedDownloads"] = args ? args.removeFailedDownloads : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
+            resourceInputs["urlBase"] = args ? args.urlBase : undefined;
             resourceInputs["useSsl"] = args ? args.useSsl : undefined;
             resourceInputs["username"] = args ? args.username : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         const secretOpts = { additionalSecretOutputs: ["password"] };
         opts = pulumi.mergeOptions(opts, secretOpts);
-        super(DownloadClientTorrentDownloadStation.__pulumiType, name, resourceInputs, opts);
+        super(DownloadClientUtorrent.__pulumiType, name, resourceInputs, opts);
     }
 }
 
 /**
- * Input properties used for looking up and filtering DownloadClientTorrentDownloadStation resources.
+ * Input properties used for looking up and filtering DownloadClientUtorrent resources.
  */
-export interface DownloadClientTorrentDownloadStationState {
+export interface DownloadClientUtorrentState {
     /**
      * Enable flag.
      */
@@ -177,17 +203,25 @@ export interface DownloadClientTorrentDownloadStationState {
      */
     host?: pulumi.Input<string>;
     /**
+     * Initial state, with Stop support. `0` Start, `1` ForceStart, `2` Pause, `3` Stop.
+     */
+    intialState?: pulumi.Input<number>;
+    /**
      * Music category.
      */
     musicCategory?: pulumi.Input<string>;
     /**
-     * Music directory.
+     * Music imported category.
      */
-    musicDirectory?: pulumi.Input<string>;
+    musicImportedCategory?: pulumi.Input<string>;
     /**
      * Download Client name.
      */
     name?: pulumi.Input<string>;
+    /**
+     * Older Music priority. `0` Last, `1` First.
+     */
+    olderMusicPriority?: pulumi.Input<number>;
     /**
      * Password.
      */
@@ -201,6 +235,10 @@ export interface DownloadClientTorrentDownloadStationState {
      */
     priority?: pulumi.Input<number>;
     /**
+     * Recent Music priority. `0` Last, `1` First.
+     */
+    recentMusicPriority?: pulumi.Input<number>;
+    /**
      * Remove completed downloads flag.
      */
     removeCompletedDownloads?: pulumi.Input<boolean>;
@@ -212,6 +250,10 @@ export interface DownloadClientTorrentDownloadStationState {
      * List of associated tags.
      */
     tags?: pulumi.Input<pulumi.Input<number>[]>;
+    /**
+     * Base URL.
+     */
+    urlBase?: pulumi.Input<string>;
     /**
      * Use SSL flag.
      */
@@ -223,9 +265,9 @@ export interface DownloadClientTorrentDownloadStationState {
 }
 
 /**
- * The set of arguments for constructing a DownloadClientTorrentDownloadStation resource.
+ * The set of arguments for constructing a DownloadClientUtorrent resource.
  */
-export interface DownloadClientTorrentDownloadStationArgs {
+export interface DownloadClientUtorrentArgs {
     /**
      * Enable flag.
      */
@@ -235,17 +277,25 @@ export interface DownloadClientTorrentDownloadStationArgs {
      */
     host?: pulumi.Input<string>;
     /**
+     * Initial state, with Stop support. `0` Start, `1` ForceStart, `2` Pause, `3` Stop.
+     */
+    intialState?: pulumi.Input<number>;
+    /**
      * Music category.
      */
     musicCategory?: pulumi.Input<string>;
     /**
-     * Music directory.
+     * Music imported category.
      */
-    musicDirectory?: pulumi.Input<string>;
+    musicImportedCategory?: pulumi.Input<string>;
     /**
      * Download Client name.
      */
     name: pulumi.Input<string>;
+    /**
+     * Older Music priority. `0` Last, `1` First.
+     */
+    olderMusicPriority?: pulumi.Input<number>;
     /**
      * Password.
      */
@@ -259,6 +309,10 @@ export interface DownloadClientTorrentDownloadStationArgs {
      */
     priority?: pulumi.Input<number>;
     /**
+     * Recent Music priority. `0` Last, `1` First.
+     */
+    recentMusicPriority?: pulumi.Input<number>;
+    /**
      * Remove completed downloads flag.
      */
     removeCompletedDownloads?: pulumi.Input<boolean>;
@@ -270,6 +324,10 @@ export interface DownloadClientTorrentDownloadStationArgs {
      * List of associated tags.
      */
     tags?: pulumi.Input<pulumi.Input<number>[]>;
+    /**
+     * Base URL.
+     */
+    urlBase?: pulumi.Input<string>;
     /**
      * Use SSL flag.
      */

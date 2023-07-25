@@ -5,8 +5,8 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 /**
- * <!-- subcategory:Download Clients -->Download Client NZBGet resource.
- * For more information refer to [Download Client](https://wiki.servarr.com/lidarr/settings#download-clients) and [NZBGet](https://wiki.servarr.com/lidarr/supported#nzbget).
+ * <!-- subcategory:Download Clients -->Download Client Sabnzbd resource.
+ * For more information refer to [Download Client](https://wiki.servarr.com/lidarr/settings#download-clients) and [Sabnzbd](https://wiki.servarr.com/lidarr/supported#sabnzbd).
  *
  * ## Example Usage
  *
@@ -14,13 +14,14 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as lidarr from "@maienm/pulumi-lidarr";
  *
- * const example = new lidarr.downloadclient.DownloadClientNzbget("example", {
+ * const example = new lidarr.downloadclients.DownloadClientSabnzbd("example", {
+ *     apiKey: "example",
  *     enable: true,
- *     host: "nzbget",
+ *     host: "sabnzbd",
  *     name: "Example",
- *     port: 6789,
+ *     port: 9091,
  *     priority: 1,
- *     urlBase: "/nzbget/",
+ *     urlBase: "/sabnzbd/",
  * });
  * ```
  *
@@ -29,12 +30,12 @@ import * as utilities from "../utilities";
  * import using the API/UI ID
  *
  * ```sh
- *  $ pulumi import lidarr:DownloadClient/downloadClientNzbget:DownloadClientNzbget example 1
+ *  $ pulumi import lidarr:DownloadClients/downloadClientSabnzbd:DownloadClientSabnzbd example 1
  * ```
  */
-export class DownloadClientNzbget extends pulumi.CustomResource {
+export class DownloadClientSabnzbd extends pulumi.CustomResource {
     /**
-     * Get an existing DownloadClientNzbget resource's state with the given name, ID, and optional extra
+     * Get an existing DownloadClientSabnzbd resource's state with the given name, ID, and optional extra
      * properties used to qualify the lookup.
      *
      * @param name The _unique_ name of the resulting resource.
@@ -42,28 +43,28 @@ export class DownloadClientNzbget extends pulumi.CustomResource {
      * @param state Any extra arguments used during the lookup.
      * @param opts Optional settings to control the behavior of the CustomResource.
      */
-    public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: DownloadClientNzbgetState, opts?: pulumi.CustomResourceOptions): DownloadClientNzbget {
-        return new DownloadClientNzbget(name, <any>state, { ...opts, id: id });
+    public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: DownloadClientSabnzbdState, opts?: pulumi.CustomResourceOptions): DownloadClientSabnzbd {
+        return new DownloadClientSabnzbd(name, <any>state, { ...opts, id: id });
     }
 
     /** @internal */
-    public static readonly __pulumiType = 'lidarr:DownloadClient/downloadClientNzbget:DownloadClientNzbget';
+    public static readonly __pulumiType = 'lidarr:DownloadClients/downloadClientSabnzbd:DownloadClientSabnzbd';
 
     /**
-     * Returns true if the given object is an instance of DownloadClientNzbget.  This is designed to work even
+     * Returns true if the given object is an instance of DownloadClientSabnzbd.  This is designed to work even
      * when multiple copies of the Pulumi SDK have been loaded into the same process.
      */
-    public static isInstance(obj: any): obj is DownloadClientNzbget {
+    public static isInstance(obj: any): obj is DownloadClientSabnzbd {
         if (obj === undefined || obj === null) {
             return false;
         }
-        return obj['__pulumiType'] === DownloadClientNzbget.__pulumiType;
+        return obj['__pulumiType'] === DownloadClientSabnzbd.__pulumiType;
     }
 
     /**
-     * Add paused flag.
+     * API key.
      */
-    public readonly addPaused!: pulumi.Output<boolean>;
+    public readonly apiKey!: pulumi.Output<string>;
     /**
      * Enable flag.
      */
@@ -81,7 +82,7 @@ export class DownloadClientNzbget extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * Older Music priority. `-100` VeryLow, `-50` Low, `0` Normal, `50` High, `100` VeryHigh, `900` Force.
+     * Older Music priority. `-100` Default, `-2` Paused, `-1` Low, `0` Normal, `1` High, `2` Force.
      */
     public readonly olderMusicPriority!: pulumi.Output<number>;
     /**
@@ -97,7 +98,7 @@ export class DownloadClientNzbget extends pulumi.CustomResource {
      */
     public readonly priority!: pulumi.Output<number>;
     /**
-     * Recent Music priority. `-100` VeryLow, `-50` Low, `0` Normal, `50` High, `100` VeryHigh, `900` Force.
+     * Recent Music priority. `-100` Default, `-2` Paused, `-1` Low, `0` Normal, `1` High, `2` Force.
      */
     public readonly recentMusicPriority!: pulumi.Output<number>;
     /**
@@ -126,19 +127,19 @@ export class DownloadClientNzbget extends pulumi.CustomResource {
     public readonly username!: pulumi.Output<string>;
 
     /**
-     * Create a DownloadClientNzbget resource with the given unique name, arguments, and options.
+     * Create a DownloadClientSabnzbd resource with the given unique name, arguments, and options.
      *
      * @param name The _unique_ name of the resource.
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args: DownloadClientNzbgetArgs, opts?: pulumi.CustomResourceOptions)
-    constructor(name: string, argsOrState?: DownloadClientNzbgetArgs | DownloadClientNzbgetState, opts?: pulumi.CustomResourceOptions) {
+    constructor(name: string, args: DownloadClientSabnzbdArgs, opts?: pulumi.CustomResourceOptions)
+    constructor(name: string, argsOrState?: DownloadClientSabnzbdArgs | DownloadClientSabnzbdState, opts?: pulumi.CustomResourceOptions) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {
-            const state = argsOrState as DownloadClientNzbgetState | undefined;
-            resourceInputs["addPaused"] = state ? state.addPaused : undefined;
+            const state = argsOrState as DownloadClientSabnzbdState | undefined;
+            resourceInputs["apiKey"] = state ? state.apiKey : undefined;
             resourceInputs["enable"] = state ? state.enable : undefined;
             resourceInputs["host"] = state ? state.host : undefined;
             resourceInputs["musicCategory"] = state ? state.musicCategory : undefined;
@@ -155,11 +156,11 @@ export class DownloadClientNzbget extends pulumi.CustomResource {
             resourceInputs["useSsl"] = state ? state.useSsl : undefined;
             resourceInputs["username"] = state ? state.username : undefined;
         } else {
-            const args = argsOrState as DownloadClientNzbgetArgs | undefined;
+            const args = argsOrState as DownloadClientSabnzbdArgs | undefined;
             if ((!args || args.name === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'name'");
             }
-            resourceInputs["addPaused"] = args ? args.addPaused : undefined;
+            resourceInputs["apiKey"] = args?.apiKey ? pulumi.secret(args.apiKey) : undefined;
             resourceInputs["enable"] = args ? args.enable : undefined;
             resourceInputs["host"] = args ? args.host : undefined;
             resourceInputs["musicCategory"] = args ? args.musicCategory : undefined;
@@ -177,20 +178,20 @@ export class DownloadClientNzbget extends pulumi.CustomResource {
             resourceInputs["username"] = args ? args.username : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
-        const secretOpts = { additionalSecretOutputs: ["password"] };
+        const secretOpts = { additionalSecretOutputs: ["apiKey", "password"] };
         opts = pulumi.mergeOptions(opts, secretOpts);
-        super(DownloadClientNzbget.__pulumiType, name, resourceInputs, opts);
+        super(DownloadClientSabnzbd.__pulumiType, name, resourceInputs, opts);
     }
 }
 
 /**
- * Input properties used for looking up and filtering DownloadClientNzbget resources.
+ * Input properties used for looking up and filtering DownloadClientSabnzbd resources.
  */
-export interface DownloadClientNzbgetState {
+export interface DownloadClientSabnzbdState {
     /**
-     * Add paused flag.
+     * API key.
      */
-    addPaused?: pulumi.Input<boolean>;
+    apiKey?: pulumi.Input<string>;
     /**
      * Enable flag.
      */
@@ -208,7 +209,7 @@ export interface DownloadClientNzbgetState {
      */
     name?: pulumi.Input<string>;
     /**
-     * Older Music priority. `-100` VeryLow, `-50` Low, `0` Normal, `50` High, `100` VeryHigh, `900` Force.
+     * Older Music priority. `-100` Default, `-2` Paused, `-1` Low, `0` Normal, `1` High, `2` Force.
      */
     olderMusicPriority?: pulumi.Input<number>;
     /**
@@ -224,7 +225,7 @@ export interface DownloadClientNzbgetState {
      */
     priority?: pulumi.Input<number>;
     /**
-     * Recent Music priority. `-100` VeryLow, `-50` Low, `0` Normal, `50` High, `100` VeryHigh, `900` Force.
+     * Recent Music priority. `-100` Default, `-2` Paused, `-1` Low, `0` Normal, `1` High, `2` Force.
      */
     recentMusicPriority?: pulumi.Input<number>;
     /**
@@ -254,13 +255,13 @@ export interface DownloadClientNzbgetState {
 }
 
 /**
- * The set of arguments for constructing a DownloadClientNzbget resource.
+ * The set of arguments for constructing a DownloadClientSabnzbd resource.
  */
-export interface DownloadClientNzbgetArgs {
+export interface DownloadClientSabnzbdArgs {
     /**
-     * Add paused flag.
+     * API key.
      */
-    addPaused?: pulumi.Input<boolean>;
+    apiKey?: pulumi.Input<string>;
     /**
      * Enable flag.
      */
@@ -278,7 +279,7 @@ export interface DownloadClientNzbgetArgs {
      */
     name: pulumi.Input<string>;
     /**
-     * Older Music priority. `-100` VeryLow, `-50` Low, `0` Normal, `50` High, `100` VeryHigh, `900` Force.
+     * Older Music priority. `-100` Default, `-2` Paused, `-1` Low, `0` Normal, `1` High, `2` Force.
      */
     olderMusicPriority?: pulumi.Input<number>;
     /**
@@ -294,7 +295,7 @@ export interface DownloadClientNzbgetArgs {
      */
     priority?: pulumi.Input<number>;
     /**
-     * Recent Music priority. `-100` VeryLow, `-50` Low, `0` Normal, `50` High, `100` VeryHigh, `900` Force.
+     * Recent Music priority. `-100` Default, `-2` Paused, `-1` Low, `0` Normal, `1` High, `2` Force.
      */
     recentMusicPriority?: pulumi.Input<number>;
     /**

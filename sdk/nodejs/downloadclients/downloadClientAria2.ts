@@ -5,8 +5,8 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 /**
- * <!-- subcategory:Download Clients -->Download Client Nzbvortex resource.
- * For more information refer to [Download Client](https://wiki.servarr.com/lidarr/settings#download-clients) and [Nzbvortex](https://wiki.servarr.com/lidarr/supported#nzbvortex).
+ * <!-- subcategory:Download Clients -->Download Client Aria2 resource.
+ * For more information refer to [Download Client](https://wiki.servarr.com/lidarr/settings#download-clients) and [Aria2](https://wiki.servarr.com/lidarr/supported#aria2).
  *
  * ## Example Usage
  *
@@ -14,13 +14,13 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as lidarr from "@maienm/pulumi-lidarr";
  *
- * const example = new lidarr.downloadclient.DownloadClientNzbvortex("example", {
+ * const example = new lidarr.downloadclients.DownloadClientAria2("example", {
  *     enable: true,
- *     host: "nzbvortex",
+ *     host: "aria2",
  *     name: "Example",
- *     port: 6789,
+ *     port: 6800,
  *     priority: 1,
- *     urlBase: "/nzbvortex/",
+ *     rpcPath: "/aria2/",
  * });
  * ```
  *
@@ -29,12 +29,12 @@ import * as utilities from "../utilities";
  * import using the API/UI ID
  *
  * ```sh
- *  $ pulumi import lidarr:DownloadClient/downloadClientNzbvortex:DownloadClientNzbvortex example 1
+ *  $ pulumi import lidarr:DownloadClients/downloadClientAria2:DownloadClientAria2 example 1
  * ```
  */
-export class DownloadClientNzbvortex extends pulumi.CustomResource {
+export class DownloadClientAria2 extends pulumi.CustomResource {
     /**
-     * Get an existing DownloadClientNzbvortex resource's state with the given name, ID, and optional extra
+     * Get an existing DownloadClientAria2 resource's state with the given name, ID, and optional extra
      * properties used to qualify the lookup.
      *
      * @param name The _unique_ name of the resulting resource.
@@ -42,28 +42,24 @@ export class DownloadClientNzbvortex extends pulumi.CustomResource {
      * @param state Any extra arguments used during the lookup.
      * @param opts Optional settings to control the behavior of the CustomResource.
      */
-    public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: DownloadClientNzbvortexState, opts?: pulumi.CustomResourceOptions): DownloadClientNzbvortex {
-        return new DownloadClientNzbvortex(name, <any>state, { ...opts, id: id });
+    public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: DownloadClientAria2State, opts?: pulumi.CustomResourceOptions): DownloadClientAria2 {
+        return new DownloadClientAria2(name, <any>state, { ...opts, id: id });
     }
 
     /** @internal */
-    public static readonly __pulumiType = 'lidarr:DownloadClient/downloadClientNzbvortex:DownloadClientNzbvortex';
+    public static readonly __pulumiType = 'lidarr:DownloadClients/downloadClientAria2:DownloadClientAria2';
 
     /**
-     * Returns true if the given object is an instance of DownloadClientNzbvortex.  This is designed to work even
+     * Returns true if the given object is an instance of DownloadClientAria2.  This is designed to work even
      * when multiple copies of the Pulumi SDK have been loaded into the same process.
      */
-    public static isInstance(obj: any): obj is DownloadClientNzbvortex {
+    public static isInstance(obj: any): obj is DownloadClientAria2 {
         if (obj === undefined || obj === null) {
             return false;
         }
-        return obj['__pulumiType'] === DownloadClientNzbvortex.__pulumiType;
+        return obj['__pulumiType'] === DownloadClientAria2.__pulumiType;
     }
 
-    /**
-     * API key.
-     */
-    public readonly apiKey!: pulumi.Output<string>;
     /**
      * Enable flag.
      */
@@ -73,17 +69,9 @@ export class DownloadClientNzbvortex extends pulumi.CustomResource {
      */
     public readonly host!: pulumi.Output<string>;
     /**
-     * Music category.
-     */
-    public readonly musicCategory!: pulumi.Output<string>;
-    /**
      * Download Client name.
      */
     public readonly name!: pulumi.Output<string>;
-    /**
-     * Older Music priority. `-1` Low, `0` Normal, `1` High.
-     */
-    public readonly olderMusicPriority!: pulumi.Output<number>;
     /**
      * Port.
      */
@@ -93,10 +81,6 @@ export class DownloadClientNzbvortex extends pulumi.CustomResource {
      */
     public readonly priority!: pulumi.Output<number>;
     /**
-     * Recent Music priority. `-1` Low, `0` Normal, `1` High.
-     */
-    public readonly recentMusicPriority!: pulumi.Output<number>;
-    /**
      * Remove completed downloads flag.
      */
     public readonly removeCompletedDownloads!: pulumi.Output<boolean>;
@@ -105,75 +89,72 @@ export class DownloadClientNzbvortex extends pulumi.CustomResource {
      */
     public readonly removeFailedDownloads!: pulumi.Output<boolean>;
     /**
+     * RPC path.
+     */
+    public readonly rpcPath!: pulumi.Output<string>;
+    /**
+     * Secret token.
+     */
+    public readonly secretToken!: pulumi.Output<string>;
+    /**
      * List of associated tags.
      */
     public readonly tags!: pulumi.Output<number[]>;
     /**
-     * Base URL.
+     * Use SSL flag.
      */
-    public readonly urlBase!: pulumi.Output<string>;
+    public readonly useSsl!: pulumi.Output<boolean>;
 
     /**
-     * Create a DownloadClientNzbvortex resource with the given unique name, arguments, and options.
+     * Create a DownloadClientAria2 resource with the given unique name, arguments, and options.
      *
      * @param name The _unique_ name of the resource.
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args: DownloadClientNzbvortexArgs, opts?: pulumi.CustomResourceOptions)
-    constructor(name: string, argsOrState?: DownloadClientNzbvortexArgs | DownloadClientNzbvortexState, opts?: pulumi.CustomResourceOptions) {
+    constructor(name: string, args: DownloadClientAria2Args, opts?: pulumi.CustomResourceOptions)
+    constructor(name: string, argsOrState?: DownloadClientAria2Args | DownloadClientAria2State, opts?: pulumi.CustomResourceOptions) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {
-            const state = argsOrState as DownloadClientNzbvortexState | undefined;
-            resourceInputs["apiKey"] = state ? state.apiKey : undefined;
+            const state = argsOrState as DownloadClientAria2State | undefined;
             resourceInputs["enable"] = state ? state.enable : undefined;
             resourceInputs["host"] = state ? state.host : undefined;
-            resourceInputs["musicCategory"] = state ? state.musicCategory : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
-            resourceInputs["olderMusicPriority"] = state ? state.olderMusicPriority : undefined;
             resourceInputs["port"] = state ? state.port : undefined;
             resourceInputs["priority"] = state ? state.priority : undefined;
-            resourceInputs["recentMusicPriority"] = state ? state.recentMusicPriority : undefined;
             resourceInputs["removeCompletedDownloads"] = state ? state.removeCompletedDownloads : undefined;
             resourceInputs["removeFailedDownloads"] = state ? state.removeFailedDownloads : undefined;
+            resourceInputs["rpcPath"] = state ? state.rpcPath : undefined;
+            resourceInputs["secretToken"] = state ? state.secretToken : undefined;
             resourceInputs["tags"] = state ? state.tags : undefined;
-            resourceInputs["urlBase"] = state ? state.urlBase : undefined;
+            resourceInputs["useSsl"] = state ? state.useSsl : undefined;
         } else {
-            const args = argsOrState as DownloadClientNzbvortexArgs | undefined;
-            if ((!args || args.apiKey === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'apiKey'");
-            }
+            const args = argsOrState as DownloadClientAria2Args | undefined;
             if ((!args || args.name === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'name'");
             }
-            resourceInputs["apiKey"] = args ? args.apiKey : undefined;
             resourceInputs["enable"] = args ? args.enable : undefined;
             resourceInputs["host"] = args ? args.host : undefined;
-            resourceInputs["musicCategory"] = args ? args.musicCategory : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
-            resourceInputs["olderMusicPriority"] = args ? args.olderMusicPriority : undefined;
             resourceInputs["port"] = args ? args.port : undefined;
             resourceInputs["priority"] = args ? args.priority : undefined;
-            resourceInputs["recentMusicPriority"] = args ? args.recentMusicPriority : undefined;
             resourceInputs["removeCompletedDownloads"] = args ? args.removeCompletedDownloads : undefined;
             resourceInputs["removeFailedDownloads"] = args ? args.removeFailedDownloads : undefined;
+            resourceInputs["rpcPath"] = args ? args.rpcPath : undefined;
+            resourceInputs["secretToken"] = args ? args.secretToken : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
-            resourceInputs["urlBase"] = args ? args.urlBase : undefined;
+            resourceInputs["useSsl"] = args ? args.useSsl : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
-        super(DownloadClientNzbvortex.__pulumiType, name, resourceInputs, opts);
+        super(DownloadClientAria2.__pulumiType, name, resourceInputs, opts);
     }
 }
 
 /**
- * Input properties used for looking up and filtering DownloadClientNzbvortex resources.
+ * Input properties used for looking up and filtering DownloadClientAria2 resources.
  */
-export interface DownloadClientNzbvortexState {
-    /**
-     * API key.
-     */
-    apiKey?: pulumi.Input<string>;
+export interface DownloadClientAria2State {
     /**
      * Enable flag.
      */
@@ -182,19 +163,11 @@ export interface DownloadClientNzbvortexState {
      * host.
      */
     host?: pulumi.Input<string>;
-    /**
-     * Music category.
-     */
-    musicCategory?: pulumi.Input<string>;
     /**
      * Download Client name.
      */
     name?: pulumi.Input<string>;
     /**
-     * Older Music priority. `-1` Low, `0` Normal, `1` High.
-     */
-    olderMusicPriority?: pulumi.Input<number>;
-    /**
      * Port.
      */
     port?: pulumi.Input<number>;
@@ -202,10 +175,6 @@ export interface DownloadClientNzbvortexState {
      * Priority.
      */
     priority?: pulumi.Input<number>;
-    /**
-     * Recent Music priority. `-1` Low, `0` Normal, `1` High.
-     */
-    recentMusicPriority?: pulumi.Input<number>;
     /**
      * Remove completed downloads flag.
      */
@@ -215,23 +184,27 @@ export interface DownloadClientNzbvortexState {
      */
     removeFailedDownloads?: pulumi.Input<boolean>;
     /**
+     * RPC path.
+     */
+    rpcPath?: pulumi.Input<string>;
+    /**
+     * Secret token.
+     */
+    secretToken?: pulumi.Input<string>;
+    /**
      * List of associated tags.
      */
     tags?: pulumi.Input<pulumi.Input<number>[]>;
     /**
-     * Base URL.
+     * Use SSL flag.
      */
-    urlBase?: pulumi.Input<string>;
+    useSsl?: pulumi.Input<boolean>;
 }
 
 /**
- * The set of arguments for constructing a DownloadClientNzbvortex resource.
+ * The set of arguments for constructing a DownloadClientAria2 resource.
  */
-export interface DownloadClientNzbvortexArgs {
-    /**
-     * API key.
-     */
-    apiKey: pulumi.Input<string>;
+export interface DownloadClientAria2Args {
     /**
      * Enable flag.
      */
@@ -241,17 +214,9 @@ export interface DownloadClientNzbvortexArgs {
      */
     host?: pulumi.Input<string>;
     /**
-     * Music category.
-     */
-    musicCategory?: pulumi.Input<string>;
-    /**
      * Download Client name.
      */
     name: pulumi.Input<string>;
-    /**
-     * Older Music priority. `-1` Low, `0` Normal, `1` High.
-     */
-    olderMusicPriority?: pulumi.Input<number>;
     /**
      * Port.
      */
@@ -261,10 +226,6 @@ export interface DownloadClientNzbvortexArgs {
      */
     priority?: pulumi.Input<number>;
     /**
-     * Recent Music priority. `-1` Low, `0` Normal, `1` High.
-     */
-    recentMusicPriority?: pulumi.Input<number>;
-    /**
      * Remove completed downloads flag.
      */
     removeCompletedDownloads?: pulumi.Input<boolean>;
@@ -273,11 +234,19 @@ export interface DownloadClientNzbvortexArgs {
      */
     removeFailedDownloads?: pulumi.Input<boolean>;
     /**
+     * RPC path.
+     */
+    rpcPath?: pulumi.Input<string>;
+    /**
+     * Secret token.
+     */
+    secretToken?: pulumi.Input<string>;
+    /**
      * List of associated tags.
      */
     tags?: pulumi.Input<pulumi.Input<number>[]>;
     /**
-     * Base URL.
+     * Use SSL flag.
      */
-    urlBase?: pulumi.Input<string>;
+    useSsl?: pulumi.Input<boolean>;
 }

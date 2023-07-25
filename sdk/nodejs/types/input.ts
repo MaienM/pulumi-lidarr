@@ -8,7 +8,7 @@ import * as outputs from "../types/output";
 export namespace Artists {
 }
 
-export namespace DownloadClient {
+export namespace DownloadClients {
 }
 
 export namespace ImportLists {

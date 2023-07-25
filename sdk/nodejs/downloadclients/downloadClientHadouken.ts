@@ -5,8 +5,8 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 /**
- * <!-- subcategory:Download Clients -->Download Client Transmission resource.
- * For more information refer to [Download Client](https://wiki.servarr.com/lidarr/settings#download-clients) and [Transmission](https://wiki.servarr.com/lidarr/supported#transmission).
+ * <!-- subcategory:Download Clients -->Download Client Hadouken resource.
+ * For more information refer to [Download Client](https://wiki.servarr.com/lidarr/settings#download-clients) and [Hadouken](https://wiki.servarr.com/lidarr/supported#hadouken).
  *
  * ## Example Usage
  *
@@ -14,13 +14,15 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as lidarr from "@maienm/pulumi-lidarr";
  *
- * const example = new lidarr.downloadclient.DownloadClientTransmission("example", {
+ * const example = new lidarr.downloadclients.DownloadClientHadouken("example", {
  *     enable: true,
- *     host: "transmission",
+ *     host: "hadouken",
  *     name: "Example",
+ *     password: "password",
  *     port: 9091,
  *     priority: 1,
- *     urlBase: "/transmission/",
+ *     urlBase: "/hadouken/",
+ *     username: "username",
  * });
  * ```
  *
@@ -29,12 +31,12 @@ import * as utilities from "../utilities";
  * import using the API/UI ID
  *
  * ```sh
- *  $ pulumi import lidarr:DownloadClient/downloadClientTransmission:DownloadClientTransmission example 1
+ *  $ pulumi import lidarr:DownloadClients/downloadClientHadouken:DownloadClientHadouken example 1
  * ```
  */
-export class DownloadClientTransmission extends pulumi.CustomResource {
+export class DownloadClientHadouken extends pulumi.CustomResource {
     /**
-     * Get an existing DownloadClientTransmission resource's state with the given name, ID, and optional extra
+     * Get an existing DownloadClientHadouken resource's state with the given name, ID, and optional extra
      * properties used to qualify the lookup.
      *
      * @param name The _unique_ name of the resulting resource.
@@ -42,28 +44,28 @@ export class DownloadClientTransmission extends pulumi.CustomResource {
      * @param state Any extra arguments used during the lookup.
      * @param opts Optional settings to control the behavior of the CustomResource.
      */
-    public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: DownloadClientTransmissionState, opts?: pulumi.CustomResourceOptions): DownloadClientTransmission {
-        return new DownloadClientTransmission(name, <any>state, { ...opts, id: id });
+    public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: DownloadClientHadoukenState, opts?: pulumi.CustomResourceOptions): DownloadClientHadouken {
+        return new DownloadClientHadouken(name, <any>state, { ...opts, id: id });
     }
 
     /** @internal */
-    public static readonly __pulumiType = 'lidarr:DownloadClient/downloadClientTransmission:DownloadClientTransmission';
+    public static readonly __pulumiType = 'lidarr:DownloadClients/downloadClientHadouken:DownloadClientHadouken';
 
     /**
-     * Returns true if the given object is an instance of DownloadClientTransmission.  This is designed to work even
+     * Returns true if the given object is an instance of DownloadClientHadouken.  This is designed to work even
      * when multiple copies of the Pulumi SDK have been loaded into the same process.
      */
-    public static isInstance(obj: any): obj is DownloadClientTransmission {
+    public static isInstance(obj: any): obj is DownloadClientHadouken {
         if (obj === undefined || obj === null) {
             return false;
         }
-        return obj['__pulumiType'] === DownloadClientTransmission.__pulumiType;
+        return obj['__pulumiType'] === DownloadClientHadouken.__pulumiType;
     }
 
     /**
-     * Add paused flag.
+     * Category.
      */
-    public readonly addPaused!: pulumi.Output<boolean>;
+    public readonly category!: pulumi.Output<string>;
     /**
      * Enable flag.
      */
@@ -73,21 +75,9 @@ export class DownloadClientTransmission extends pulumi.CustomResource {
      */
     public readonly host!: pulumi.Output<string>;
     /**
-     * Music category.
-     */
-    public readonly musicCategory!: pulumi.Output<string>;
-    /**
-     * Music directory.
-     */
-    public readonly musicDirectory!: pulumi.Output<string>;
-    /**
      * Download Client name.
      */
     public readonly name!: pulumi.Output<string>;
-    /**
-     * Older Music priority. `0` Last, `1` First.
-     */
-    public readonly olderMusicPriority!: pulumi.Output<number>;
     /**
      * Password.
      */
@@ -100,10 +90,6 @@ export class DownloadClientTransmission extends pulumi.CustomResource {
      * Priority.
      */
     public readonly priority!: pulumi.Output<number>;
-    /**
-     * Recent Music priority. `0` Last, `1` First.
-     */
-    public readonly recentMusicPriority!: pulumi.Output<number>;
     /**
      * Remove completed downloads flag.
      */
@@ -130,29 +116,25 @@ export class DownloadClientTransmission extends pulumi.CustomResource {
     public readonly username!: pulumi.Output<string>;
 
     /**
-     * Create a DownloadClientTransmission resource with the given unique name, arguments, and options.
+     * Create a DownloadClientHadouken resource with the given unique name, arguments, and options.
      *
      * @param name The _unique_ name of the resource.
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args: DownloadClientTransmissionArgs, opts?: pulumi.CustomResourceOptions)
-    constructor(name: string, argsOrState?: DownloadClientTransmissionArgs | DownloadClientTransmissionState, opts?: pulumi.CustomResourceOptions) {
+    constructor(name: string, args: DownloadClientHadoukenArgs, opts?: pulumi.CustomResourceOptions)
+    constructor(name: string, argsOrState?: DownloadClientHadoukenArgs | DownloadClientHadoukenState, opts?: pulumi.CustomResourceOptions) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {
-            const state = argsOrState as DownloadClientTransmissionState | undefined;
-            resourceInputs["addPaused"] = state ? state.addPaused : undefined;
+            const state = argsOrState as DownloadClientHadoukenState | undefined;
+            resourceInputs["category"] = state ? state.category : undefined;
             resourceInputs["enable"] = state ? state.enable : undefined;
             resourceInputs["host"] = state ? state.host : undefined;
-            resourceInputs["musicCategory"] = state ? state.musicCategory : undefined;
-            resourceInputs["musicDirectory"] = state ? state.musicDirectory : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
-            resourceInputs["olderMusicPriority"] = state ? state.olderMusicPriority : undefined;
             resourceInputs["password"] = state ? state.password : undefined;
             resourceInputs["port"] = state ? state.port : undefined;
             resourceInputs["priority"] = state ? state.priority : undefined;
-            resourceInputs["recentMusicPriority"] = state ? state.recentMusicPriority : undefined;
             resourceInputs["removeCompletedDownloads"] = state ? state.removeCompletedDownloads : undefined;
             resourceInputs["removeFailedDownloads"] = state ? state.removeFailedDownloads : undefined;
             resourceInputs["tags"] = state ? state.tags : undefined;
@@ -160,21 +142,23 @@ export class DownloadClientTransmission extends pulumi.CustomResource {
             resourceInputs["useSsl"] = state ? state.useSsl : undefined;
             resourceInputs["username"] = state ? state.username : undefined;
         } else {
-            const args = argsOrState as DownloadClientTransmissionArgs | undefined;
+            const args = argsOrState as DownloadClientHadoukenArgs | undefined;
             if ((!args || args.name === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'name'");
             }
-            resourceInputs["addPaused"] = args ? args.addPaused : undefined;
+            if ((!args || args.password === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'password'");
+            }
+            if ((!args || args.username === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'username'");
+            }
+            resourceInputs["category"] = args ? args.category : undefined;
             resourceInputs["enable"] = args ? args.enable : undefined;
             resourceInputs["host"] = args ? args.host : undefined;
-            resourceInputs["musicCategory"] = args ? args.musicCategory : undefined;
-            resourceInputs["musicDirectory"] = args ? args.musicDirectory : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
-            resourceInputs["olderMusicPriority"] = args ? args.olderMusicPriority : undefined;
-            resourceInputs["password"] = args ? args.password : undefined;
+            resourceInputs["password"] = args?.password ? pulumi.secret(args.password) : undefined;
             resourceInputs["port"] = args ? args.port : undefined;
             resourceInputs["priority"] = args ? args.priority : undefined;
-            resourceInputs["recentMusicPriority"] = args ? args.recentMusicPriority : undefined;
             resourceInputs["removeCompletedDownloads"] = args ? args.removeCompletedDownloads : undefined;
             resourceInputs["removeFailedDownloads"] = args ? args.removeFailedDownloads : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
@@ -183,18 +167,20 @@ export class DownloadClientTransmission extends pulumi.CustomResource {
             resourceInputs["username"] = args ? args.username : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
-        super(DownloadClientTransmission.__pulumiType, name, resourceInputs, opts);
+        const secretOpts = { additionalSecretOutputs: ["password"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
+        super(DownloadClientHadouken.__pulumiType, name, resourceInputs, opts);
     }
 }
 
 /**
- * Input properties used for looking up and filtering DownloadClientTransmission resources.
+ * Input properties used for looking up and filtering DownloadClientHadouken resources.
  */
-export interface DownloadClientTransmissionState {
+export interface DownloadClientHadoukenState {
     /**
-     * Add paused flag.
+     * Category.
      */
-    addPaused?: pulumi.Input<boolean>;
+    category?: pulumi.Input<string>;
     /**
      * Enable flag.
      */
@@ -203,23 +189,11 @@ export interface DownloadClientTransmissionState {
      * host.
      */
     host?: pulumi.Input<string>;
-    /**
-     * Music category.
-     */
-    musicCategory?: pulumi.Input<string>;
-    /**
-     * Music directory.
-     */
-    musicDirectory?: pulumi.Input<string>;
     /**
      * Download Client name.
      */
     name?: pulumi.Input<string>;
     /**
-     * Older Music priority. `0` Last, `1` First.
-     */
-    olderMusicPriority?: pulumi.Input<number>;
-    /**
      * Password.
      */
     password?: pulumi.Input<string>;
@@ -231,10 +205,6 @@ export interface DownloadClientTransmissionState {
      * Priority.
      */
     priority?: pulumi.Input<number>;
-    /**
-     * Recent Music priority. `0` Last, `1` First.
-     */
-    recentMusicPriority?: pulumi.Input<number>;
     /**
      * Remove completed downloads flag.
      */
@@ -262,13 +232,13 @@ export interface DownloadClientTransmissionState {
 }
 
 /**
- * The set of arguments for constructing a DownloadClientTransmission resource.
+ * The set of arguments for constructing a DownloadClientHadouken resource.
  */
-export interface DownloadClientTransmissionArgs {
+export interface DownloadClientHadoukenArgs {
     /**
-     * Add paused flag.
+     * Category.
      */
-    addPaused?: pulumi.Input<boolean>;
+    category?: pulumi.Input<string>;
     /**
      * Enable flag.
      */
@@ -278,25 +248,13 @@ export interface DownloadClientTransmissionArgs {
      */
     host?: pulumi.Input<string>;
     /**
-     * Music category.
-     */
-    musicCategory?: pulumi.Input<string>;
-    /**
-     * Music directory.
-     */
-    musicDirectory?: pulumi.Input<string>;
-    /**
      * Download Client name.
      */
     name: pulumi.Input<string>;
     /**
-     * Older Music priority. `0` Last, `1` First.
-     */
-    olderMusicPriority?: pulumi.Input<number>;
-    /**
      * Password.
      */
-    password?: pulumi.Input<string>;
+    password: pulumi.Input<string>;
     /**
      * Port.
      */
@@ -305,10 +263,6 @@ export interface DownloadClientTransmissionArgs {
      * Priority.
      */
     priority?: pulumi.Input<number>;
-    /**
-     * Recent Music priority. `0` Last, `1` First.
-     */
-    recentMusicPriority?: pulumi.Input<number>;
     /**
      * Remove completed downloads flag.
      */
@@ -332,5 +286,5 @@ export interface DownloadClientTransmissionArgs {
     /**
      * Username.
      */
-    username?: pulumi.Input<string>;
+    username: pulumi.Input<string>;
 }

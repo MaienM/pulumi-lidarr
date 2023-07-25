@@ -15,13 +15,13 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as lidarr from "@pulumi/lidarr";
  *
- * const example = lidarr.DownloadClient.getDownloadClients({});
+ * const example = lidarr.DownloadClients.getDownloadClients({});
  * ```
  */
 export function getDownloadClients(opts?: pulumi.InvokeOptions): Promise<GetDownloadClientsResult> {
 
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
-    return pulumi.runtime.invoke("lidarr:DownloadClient/getDownloadClients:getDownloadClients", {
+    return pulumi.runtime.invoke("lidarr:DownloadClients/getDownloadClients:getDownloadClients", {
     }, opts);
 }
 
@@ -32,7 +32,7 @@ export interface GetDownloadClientsResult {
     /**
      * Download Client list..
      */
-    readonly downloadClients: outputs.DownloadClient.GetDownloadClientsDownloadClient[];
+    readonly downloadClients: outputs.DownloadClients.GetDownloadClientsDownloadClient[];
     /**
      * The ID of this resource.
      */

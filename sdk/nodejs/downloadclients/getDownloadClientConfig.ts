@@ -13,13 +13,13 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as lidarr from "@pulumi/lidarr";
  *
- * const example = lidarr.DownloadClient.getDownloadClientConfig({});
+ * const example = lidarr.DownloadClients.getDownloadClientConfig({});
  * ```
  */
 export function getDownloadClientConfig(opts?: pulumi.InvokeOptions): Promise<GetDownloadClientConfigResult> {
 
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
-    return pulumi.runtime.invoke("lidarr:DownloadClient/getDownloadClientConfig:getDownloadClientConfig", {
+    return pulumi.runtime.invoke("lidarr:DownloadClients/getDownloadClientConfig:getDownloadClientConfig", {
     }, opts);
 }
 

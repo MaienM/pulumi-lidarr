@@ -14,7 +14,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as lidarr from "@maienm/pulumi-lidarr";
  *
- * const example = new lidarr.downloadclient.DownloadClient("example", {
+ * const example = new lidarr.downloadclients.DownloadClient("example", {
  *     configContract: "TransmissionSettings",
  *     enable: true,
  *     host: "transmission",
@@ -32,7 +32,7 @@ import * as utilities from "../utilities";
  * import using the API/UI ID
  *
  * ```sh
- *  $ pulumi import lidarr:DownloadClient/downloadClient:DownloadClient example 1
+ *  $ pulumi import lidarr:DownloadClients/downloadClient:DownloadClient example 1
  * ```
  */
 export class DownloadClient extends pulumi.CustomResource {
@@ -50,7 +50,7 @@ export class DownloadClient extends pulumi.CustomResource {
     }
 
     /** @internal */
-    public static readonly __pulumiType = 'lidarr:DownloadClient/downloadClient:DownloadClient';
+    public static readonly __pulumiType = 'lidarr:DownloadClients/downloadClient:DownloadClient';
 
     /**
      * Returns true if the given object is an instance of DownloadClient.  This is designed to work even

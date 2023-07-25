@@ -5,8 +5,8 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 /**
- * <!-- subcategory:Download Clients -->Download Client uTorrent resource.
- * For more information refer to [Download Client](https://wiki.servarr.com/lidarr/settings#download-clients) and [uTorrent](https://wiki.servarr.com/lidarr/supported#utorrent).
+ * <!-- subcategory:Download Clients -->Download Client Vuze resource.
+ * For more information refer to [Download Client](https://wiki.servarr.com/lidarr/settings#download-clients) and [Vuze](https://wiki.servarr.com/lidarr/supported#vuze).
  *
  * ## Example Usage
  *
@@ -14,14 +14,13 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as lidarr from "@maienm/pulumi-lidarr";
  *
- * const example = new lidarr.downloadclient.DownloadClientUtorrent("example", {
+ * const example = new lidarr.downloadclients.DownloadClientVuze("example", {
  *     enable: true,
- *     host: "utorrent",
- *     musicCategory: "tv-lidarr",
+ *     host: "vuze",
  *     name: "Example",
  *     port: 9091,
  *     priority: 1,
- *     urlBase: "/utorrent/",
+ *     urlBase: "/vuze/",
  * });
  * ```
  *
@@ -30,12 +29,12 @@ import * as utilities from "../utilities";
  * import using the API/UI ID
  *
  * ```sh
- *  $ pulumi import lidarr:DownloadClient/downloadClientUtorrent:DownloadClientUtorrent example 1
+ *  $ pulumi import lidarr:DownloadClients/downloadClientVuze:DownloadClientVuze example 1
  * ```
  */
-export class DownloadClientUtorrent extends pulumi.CustomResource {
+export class DownloadClientVuze extends pulumi.CustomResource {
     /**
-     * Get an existing DownloadClientUtorrent resource's state with the given name, ID, and optional extra
+     * Get an existing DownloadClientVuze resource's state with the given name, ID, and optional extra
      * properties used to qualify the lookup.
      *
      * @param name The _unique_ name of the resulting resource.
@@ -43,24 +42,28 @@ export class DownloadClientUtorrent extends pulumi.CustomResource {
      * @param state Any extra arguments used during the lookup.
      * @param opts Optional settings to control the behavior of the CustomResource.
      */
-    public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: DownloadClientUtorrentState, opts?: pulumi.CustomResourceOptions): DownloadClientUtorrent {
-        return new DownloadClientUtorrent(name, <any>state, { ...opts, id: id });
+    public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: DownloadClientVuzeState, opts?: pulumi.CustomResourceOptions): DownloadClientVuze {
+        return new DownloadClientVuze(name, <any>state, { ...opts, id: id });
     }
 
     /** @internal */
-    public static readonly __pulumiType = 'lidarr:DownloadClient/downloadClientUtorrent:DownloadClientUtorrent';
+    public static readonly __pulumiType = 'lidarr:DownloadClients/downloadClientVuze:DownloadClientVuze';
 
     /**
-     * Returns true if the given object is an instance of DownloadClientUtorrent.  This is designed to work even
+     * Returns true if the given object is an instance of DownloadClientVuze.  This is designed to work even
      * when multiple copies of the Pulumi SDK have been loaded into the same process.
      */
-    public static isInstance(obj: any): obj is DownloadClientUtorrent {
+    public static isInstance(obj: any): obj is DownloadClientVuze {
         if (obj === undefined || obj === null) {
             return false;
         }
-        return obj['__pulumiType'] === DownloadClientUtorrent.__pulumiType;
+        return obj['__pulumiType'] === DownloadClientVuze.__pulumiType;
     }
 
+    /**
+     * Add paused flag.
+     */
+    public readonly addPaused!: pulumi.Output<boolean>;
     /**
      * Enable flag.
      */
@@ -70,17 +73,13 @@ export class DownloadClientUtorrent extends pulumi.CustomResource {
      */
     public readonly host!: pulumi.Output<string>;
     /**
-     * Initial state, with Stop support. `0` Start, `1` ForceStart, `2` Pause, `3` Stop.
-     */
-    public readonly intialState!: pulumi.Output<number>;
-    /**
      * Music category.
      */
     public readonly musicCategory!: pulumi.Output<string>;
     /**
-     * Music imported category.
+     * Music directory.
      */
-    public readonly musicImportedCategory!: pulumi.Output<string>;
+    public readonly musicDirectory!: pulumi.Output<string>;
     /**
      * Download Client name.
      */
@@ -131,23 +130,23 @@ export class DownloadClientUtorrent extends pulumi.CustomResource {
     public readonly username!: pulumi.Output<string>;
 
     /**
-     * Create a DownloadClientUtorrent resource with the given unique name, arguments, and options.
+     * Create a DownloadClientVuze resource with the given unique name, arguments, and options.
      *
      * @param name The _unique_ name of the resource.
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args: DownloadClientUtorrentArgs, opts?: pulumi.CustomResourceOptions)
-    constructor(name: string, argsOrState?: DownloadClientUtorrentArgs | DownloadClientUtorrentState, opts?: pulumi.CustomResourceOptions) {
+    constructor(name: string, args: DownloadClientVuzeArgs, opts?: pulumi.CustomResourceOptions)
+    constructor(name: string, argsOrState?: DownloadClientVuzeArgs | DownloadClientVuzeState, opts?: pulumi.CustomResourceOptions) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {
-            const state = argsOrState as DownloadClientUtorrentState | undefined;
+            const state = argsOrState as DownloadClientVuzeState | undefined;
+            resourceInputs["addPaused"] = state ? state.addPaused : undefined;
             resourceInputs["enable"] = state ? state.enable : undefined;
             resourceInputs["host"] = state ? state.host : undefined;
-            resourceInputs["intialState"] = state ? state.intialState : undefined;
             resourceInputs["musicCategory"] = state ? state.musicCategory : undefined;
-            resourceInputs["musicImportedCategory"] = state ? state.musicImportedCategory : undefined;
+            resourceInputs["musicDirectory"] = state ? state.musicDirectory : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["olderMusicPriority"] = state ? state.olderMusicPriority : undefined;
             resourceInputs["password"] = state ? state.password : undefined;
@@ -161,15 +160,15 @@ export class DownloadClientUtorrent extends pulumi.CustomResource {
             resourceInputs["useSsl"] = state ? state.useSsl : undefined;
             resourceInputs["username"] = state ? state.username : undefined;
         } else {
-            const args = argsOrState as DownloadClientUtorrentArgs | undefined;
+            const args = argsOrState as DownloadClientVuzeArgs | undefined;
             if ((!args || args.name === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'name'");
             }
+            resourceInputs["addPaused"] = args ? args.addPaused : undefined;
             resourceInputs["enable"] = args ? args.enable : undefined;
             resourceInputs["host"] = args ? args.host : undefined;
-            resourceInputs["intialState"] = args ? args.intialState : undefined;
             resourceInputs["musicCategory"] = args ? args.musicCategory : undefined;
-            resourceInputs["musicImportedCategory"] = args ? args.musicImportedCategory : undefined;
+            resourceInputs["musicDirectory"] = args ? args.musicDirectory : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["olderMusicPriority"] = args ? args.olderMusicPriority : undefined;
             resourceInputs["password"] = args?.password ? pulumi.secret(args.password) : undefined;
@@ -186,14 +185,18 @@ export class DownloadClientUtorrent extends pulumi.CustomResource {
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         const secretOpts = { additionalSecretOutputs: ["password"] };
         opts = pulumi.mergeOptions(opts, secretOpts);
-        super(DownloadClientUtorrent.__pulumiType, name, resourceInputs, opts);
+        super(DownloadClientVuze.__pulumiType, name, resourceInputs, opts);
     }
 }
 
 /**
- * Input properties used for looking up and filtering DownloadClientUtorrent resources.
+ * Input properties used for looking up and filtering DownloadClientVuze resources.
  */
-export interface DownloadClientUtorrentState {
+export interface DownloadClientVuzeState {
+    /**
+     * Add paused flag.
+     */
+    addPaused?: pulumi.Input<boolean>;
     /**
      * Enable flag.
      */
@@ -203,17 +206,13 @@ export interface DownloadClientUtorrentState {
      */
     host?: pulumi.Input<string>;
     /**
-     * Initial state, with Stop support. `0` Start, `1` ForceStart, `2` Pause, `3` Stop.
-     */
-    intialState?: pulumi.Input<number>;
-    /**
      * Music category.
      */
     musicCategory?: pulumi.Input<string>;
     /**
-     * Music imported category.
+     * Music directory.
      */
-    musicImportedCategory?: pulumi.Input<string>;
+    musicDirectory?: pulumi.Input<string>;
     /**
      * Download Client name.
      */
@@ -265,9 +264,13 @@ export interface DownloadClientUtorrentState {
 }
 
 /**
- * The set of arguments for constructing a DownloadClientUtorrent resource.
+ * The set of arguments for constructing a DownloadClientVuze resource.
  */
-export interface DownloadClientUtorrentArgs {
+export interface DownloadClientVuzeArgs {
+    /**
+     * Add paused flag.
+     */
+    addPaused?: pulumi.Input<boolean>;
     /**
      * Enable flag.
      */
@@ -277,17 +280,13 @@ export interface DownloadClientUtorrentArgs {
      */
     host?: pulumi.Input<string>;
     /**
-     * Initial state, with Stop support. `0` Start, `1` ForceStart, `2` Pause, `3` Stop.
-     */
-    intialState?: pulumi.Input<number>;
-    /**
      * Music category.
      */
     musicCategory?: pulumi.Input<string>;
     /**
-     * Music imported category.
+     * Music directory.
      */
-    musicImportedCategory?: pulumi.Input<string>;
+    musicDirectory?: pulumi.Input<string>;
     /**
      * Download Client name.
      */

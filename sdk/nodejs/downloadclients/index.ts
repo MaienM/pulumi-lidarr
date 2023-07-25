@@ -132,68 +132,68 @@ const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
-            case "lidarr:DownloadClient/downloadClient:DownloadClient":
+            case "lidarr:DownloadClients/downloadClient:DownloadClient":
                 return new DownloadClient(name, <any>undefined, { urn })
-            case "lidarr:DownloadClient/downloadClientAria2:DownloadClientAria2":
+            case "lidarr:DownloadClients/downloadClientAria2:DownloadClientAria2":
                 return new DownloadClientAria2(name, <any>undefined, { urn })
-            case "lidarr:DownloadClient/downloadClientConfig:DownloadClientConfig":
+            case "lidarr:DownloadClients/downloadClientConfig:DownloadClientConfig":
                 return new DownloadClientConfig(name, <any>undefined, { urn })
-            case "lidarr:DownloadClient/downloadClientDeluge:DownloadClientDeluge":
+            case "lidarr:DownloadClients/downloadClientDeluge:DownloadClientDeluge":
                 return new DownloadClientDeluge(name, <any>undefined, { urn })
-            case "lidarr:DownloadClient/downloadClientFlood:DownloadClientFlood":
+            case "lidarr:DownloadClients/downloadClientFlood:DownloadClientFlood":
                 return new DownloadClientFlood(name, <any>undefined, { urn })
-            case "lidarr:DownloadClient/downloadClientHadouken:DownloadClientHadouken":
+            case "lidarr:DownloadClients/downloadClientHadouken:DownloadClientHadouken":
                 return new DownloadClientHadouken(name, <any>undefined, { urn })
-            case "lidarr:DownloadClient/downloadClientNzbget:DownloadClientNzbget":
+            case "lidarr:DownloadClients/downloadClientNzbget:DownloadClientNzbget":
                 return new DownloadClientNzbget(name, <any>undefined, { urn })
-            case "lidarr:DownloadClient/downloadClientNzbvortex:DownloadClientNzbvortex":
+            case "lidarr:DownloadClients/downloadClientNzbvortex:DownloadClientNzbvortex":
                 return new DownloadClientNzbvortex(name, <any>undefined, { urn })
-            case "lidarr:DownloadClient/downloadClientPneumatic:DownloadClientPneumatic":
+            case "lidarr:DownloadClients/downloadClientPneumatic:DownloadClientPneumatic":
                 return new DownloadClientPneumatic(name, <any>undefined, { urn })
-            case "lidarr:DownloadClient/downloadClientQbittorrent:DownloadClientQbittorrent":
+            case "lidarr:DownloadClients/downloadClientQbittorrent:DownloadClientQbittorrent":
                 return new DownloadClientQbittorrent(name, <any>undefined, { urn })
-            case "lidarr:DownloadClient/downloadClientRtorrent:DownloadClientRtorrent":
+            case "lidarr:DownloadClients/downloadClientRtorrent:DownloadClientRtorrent":
                 return new DownloadClientRtorrent(name, <any>undefined, { urn })
-            case "lidarr:DownloadClient/downloadClientSabnzbd:DownloadClientSabnzbd":
+            case "lidarr:DownloadClients/downloadClientSabnzbd:DownloadClientSabnzbd":
                 return new DownloadClientSabnzbd(name, <any>undefined, { urn })
-            case "lidarr:DownloadClient/downloadClientTorrentBlackhole:DownloadClientTorrentBlackhole":
+            case "lidarr:DownloadClients/downloadClientTorrentBlackhole:DownloadClientTorrentBlackhole":
                 return new DownloadClientTorrentBlackhole(name, <any>undefined, { urn })
-            case "lidarr:DownloadClient/downloadClientTorrentDownloadStation:DownloadClientTorrentDownloadStation":
+            case "lidarr:DownloadClients/downloadClientTorrentDownloadStation:DownloadClientTorrentDownloadStation":
                 return new DownloadClientTorrentDownloadStation(name, <any>undefined, { urn })
-            case "lidarr:DownloadClient/downloadClientTransmission:DownloadClientTransmission":
+            case "lidarr:DownloadClients/downloadClientTransmission:DownloadClientTransmission":
                 return new DownloadClientTransmission(name, <any>undefined, { urn })
-            case "lidarr:DownloadClient/downloadClientUsenetBlackhole:DownloadClientUsenetBlackhole":
+            case "lidarr:DownloadClients/downloadClientUsenetBlackhole:DownloadClientUsenetBlackhole":
                 return new DownloadClientUsenetBlackhole(name, <any>undefined, { urn })
-            case "lidarr:DownloadClient/downloadClientUsenetDownloadStation:DownloadClientUsenetDownloadStation":
+            case "lidarr:DownloadClients/downloadClientUsenetDownloadStation:DownloadClientUsenetDownloadStation":
                 return new DownloadClientUsenetDownloadStation(name, <any>undefined, { urn })
-            case "lidarr:DownloadClient/downloadClientUtorrent:DownloadClientUtorrent":
+            case "lidarr:DownloadClients/downloadClientUtorrent:DownloadClientUtorrent":
                 return new DownloadClientUtorrent(name, <any>undefined, { urn })
-            case "lidarr:DownloadClient/downloadClientVuze:DownloadClientVuze":
+            case "lidarr:DownloadClients/downloadClientVuze:DownloadClientVuze":
                 return new DownloadClientVuze(name, <any>undefined, { urn })
-            case "lidarr:DownloadClient/remotePathMapping:RemotePathMapping":
+            case "lidarr:DownloadClients/remotePathMapping:RemotePathMapping":
                 return new RemotePathMapping(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
     },
 };
-pulumi.runtime.registerResourceModule("lidarr", "DownloadClient/downloadClient", _module)
-pulumi.runtime.registerResourceModule("lidarr", "DownloadClient/downloadClientAria2", _module)
-pulumi.runtime.registerResourceModule("lidarr", "DownloadClient/downloadClientConfig", _module)
-pulumi.runtime.registerResourceModule("lidarr", "DownloadClient/downloadClientDeluge", _module)
-pulumi.runtime.registerResourceModule("lidarr", "DownloadClient/downloadClientFlood", _module)
-pulumi.runtime.registerResourceModule("lidarr", "DownloadClient/downloadClientHadouken", _module)
-pulumi.runtime.registerResourceModule("lidarr", "DownloadClient/downloadClientNzbget", _module)
-pulumi.runtime.registerResourceModule("lidarr", "DownloadClient/downloadClientNzbvortex", _module)
-pulumi.runtime.registerResourceModule("lidarr", "DownloadClient/downloadClientPneumatic", _module)
-pulumi.runtime.registerResourceModule("lidarr", "DownloadClient/downloadClientQbittorrent", _module)
-pulumi.runtime.registerResourceModule("lidarr", "DownloadClient/downloadClientRtorrent", _module)
-pulumi.runtime.registerResourceModule("lidarr", "DownloadClient/downloadClientSabnzbd", _module)
-pulumi.runtime.registerResourceModule("lidarr", "DownloadClient/downloadClientTorrentBlackhole", _module)
-pulumi.runtime.registerResourceModule("lidarr", "DownloadClient/downloadClientTorrentDownloadStation", _module)
-pulumi.runtime.registerResourceModule("lidarr", "DownloadClient/downloadClientTransmission", _module)
-pulumi.runtime.registerResourceModule("lidarr", "DownloadClient/downloadClientUsenetBlackhole", _module)
-pulumi.runtime.registerResourceModule("lidarr", "DownloadClient/downloadClientUsenetDownloadStation", _module)
-pulumi.runtime.registerResourceModule("lidarr", "DownloadClient/downloadClientUtorrent", _module)
-pulumi.runtime.registerResourceModule("lidarr", "DownloadClient/downloadClientVuze", _module)
-pulumi.runtime.registerResourceModule("lidarr", "DownloadClient/remotePathMapping", _module)
+pulumi.runtime.registerResourceModule("lidarr", "DownloadClients/downloadClient", _module)
+pulumi.runtime.registerResourceModule("lidarr", "DownloadClients/downloadClientAria2", _module)
+pulumi.runtime.registerResourceModule("lidarr", "DownloadClients/downloadClientConfig", _module)
+pulumi.runtime.registerResourceModule("lidarr", "DownloadClients/downloadClientDeluge", _module)
+pulumi.runtime.registerResourceModule("lidarr", "DownloadClients/downloadClientFlood", _module)
+pulumi.runtime.registerResourceModule("lidarr", "DownloadClients/downloadClientHadouken", _module)
+pulumi.runtime.registerResourceModule("lidarr", "DownloadClients/downloadClientNzbget", _module)
+pulumi.runtime.registerResourceModule("lidarr", "DownloadClients/downloadClientNzbvortex", _module)
+pulumi.runtime.registerResourceModule("lidarr", "DownloadClients/downloadClientPneumatic", _module)
+pulumi.runtime.registerResourceModule("lidarr", "DownloadClients/downloadClientQbittorrent", _module)
+pulumi.runtime.registerResourceModule("lidarr", "DownloadClients/downloadClientRtorrent", _module)
+pulumi.runtime.registerResourceModule("lidarr", "DownloadClients/downloadClientSabnzbd", _module)
+pulumi.runtime.registerResourceModule("lidarr", "DownloadClients/downloadClientTorrentBlackhole", _module)
+pulumi.runtime.registerResourceModule("lidarr", "DownloadClients/downloadClientTorrentDownloadStation", _module)
+pulumi.runtime.registerResourceModule("lidarr", "DownloadClients/downloadClientTransmission", _module)
+pulumi.runtime.registerResourceModule("lidarr", "DownloadClients/downloadClientUsenetBlackhole", _module)
+pulumi.runtime.registerResourceModule("lidarr", "DownloadClients/downloadClientUsenetDownloadStation", _module)
+pulumi.runtime.registerResourceModule("lidarr", "DownloadClients/downloadClientUtorrent", _module)
+pulumi.runtime.registerResourceModule("lidarr", "DownloadClients/downloadClientVuze", _module)
+pulumi.runtime.registerResourceModule("lidarr", "DownloadClients/remotePathMapping", _module)

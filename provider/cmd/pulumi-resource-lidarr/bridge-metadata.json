@@ -2,26 +2,26 @@
     "renames": {
         "resources": {
             "lidarr:Artists/artist:Artist": "lidarr_artist",
-            "lidarr:DownloadClient/downloadClient:DownloadClient": "lidarr_download_client",
-            "lidarr:DownloadClient/downloadClientAria2:DownloadClientAria2": "lidarr_download_client_aria2",
-            "lidarr:DownloadClient/downloadClientConfig:DownloadClientConfig": "lidarr_download_client_config",
-            "lidarr:DownloadClient/downloadClientDeluge:DownloadClientDeluge": "lidarr_download_client_deluge",
-            "lidarr:DownloadClient/downloadClientFlood:DownloadClientFlood": "lidarr_download_client_flood",
-            "lidarr:DownloadClient/downloadClientHadouken:DownloadClientHadouken": "lidarr_download_client_hadouken",
-            "lidarr:DownloadClient/downloadClientNzbget:DownloadClientNzbget": "lidarr_download_client_nzbget",
-            "lidarr:DownloadClient/downloadClientNzbvortex:DownloadClientNzbvortex": "lidarr_download_client_nzbvortex",
-            "lidarr:DownloadClient/downloadClientPneumatic:DownloadClientPneumatic": "lidarr_download_client_pneumatic",
-            "lidarr:DownloadClient/downloadClientQbittorrent:DownloadClientQbittorrent": "lidarr_download_client_qbittorrent",
-            "lidarr:DownloadClient/downloadClientRtorrent:DownloadClientRtorrent": "lidarr_download_client_rtorrent",
-            "lidarr:DownloadClient/downloadClientSabnzbd:DownloadClientSabnzbd": "lidarr_download_client_sabnzbd",
-            "lidarr:DownloadClient/downloadClientTorrentBlackhole:DownloadClientTorrentBlackhole": "lidarr_download_client_torrent_blackhole",
-            "lidarr:DownloadClient/downloadClientTorrentDownloadStation:DownloadClientTorrentDownloadStation": "lidarr_download_client_torrent_download_station",
-            "lidarr:DownloadClient/downloadClientTransmission:DownloadClientTransmission": "lidarr_download_client_transmission",
-            "lidarr:DownloadClient/downloadClientUsenetBlackhole:DownloadClientUsenetBlackhole": "lidarr_download_client_usenet_blackhole",
-            "lidarr:DownloadClient/downloadClientUsenetDownloadStation:DownloadClientUsenetDownloadStation": "lidarr_download_client_usenet_download_station",
-            "lidarr:DownloadClient/downloadClientUtorrent:DownloadClientUtorrent": "lidarr_download_client_utorrent",
-            "lidarr:DownloadClient/downloadClientVuze:DownloadClientVuze": "lidarr_download_client_vuze",
-            "lidarr:DownloadClient/remotePathMapping:RemotePathMapping": "lidarr_remote_path_mapping",
+            "lidarr:DownloadClients/downloadClient:DownloadClient": "lidarr_download_client",
+            "lidarr:DownloadClients/downloadClientAria2:DownloadClientAria2": "lidarr_download_client_aria2",
+            "lidarr:DownloadClients/downloadClientConfig:DownloadClientConfig": "lidarr_download_client_config",
+            "lidarr:DownloadClients/downloadClientDeluge:DownloadClientDeluge": "lidarr_download_client_deluge",
+            "lidarr:DownloadClients/downloadClientFlood:DownloadClientFlood": "lidarr_download_client_flood",
+            "lidarr:DownloadClients/downloadClientHadouken:DownloadClientHadouken": "lidarr_download_client_hadouken",
+            "lidarr:DownloadClients/downloadClientNzbget:DownloadClientNzbget": "lidarr_download_client_nzbget",
+            "lidarr:DownloadClients/downloadClientNzbvortex:DownloadClientNzbvortex": "lidarr_download_client_nzbvortex",
+            "lidarr:DownloadClients/downloadClientPneumatic:DownloadClientPneumatic": "lidarr_download_client_pneumatic",
+            "lidarr:DownloadClients/downloadClientQbittorrent:DownloadClientQbittorrent": "lidarr_download_client_qbittorrent",
+            "lidarr:DownloadClients/downloadClientRtorrent:DownloadClientRtorrent": "lidarr_download_client_rtorrent",
+            "lidarr:DownloadClients/downloadClientSabnzbd:DownloadClientSabnzbd": "lidarr_download_client_sabnzbd",
+            "lidarr:DownloadClients/downloadClientTorrentBlackhole:DownloadClientTorrentBlackhole": "lidarr_download_client_torrent_blackhole",
+            "lidarr:DownloadClients/downloadClientTorrentDownloadStation:DownloadClientTorrentDownloadStation": "lidarr_download_client_torrent_download_station",
+            "lidarr:DownloadClients/downloadClientTransmission:DownloadClientTransmission": "lidarr_download_client_transmission",
+            "lidarr:DownloadClients/downloadClientUsenetBlackhole:DownloadClientUsenetBlackhole": "lidarr_download_client_usenet_blackhole",
+            "lidarr:DownloadClients/downloadClientUsenetDownloadStation:DownloadClientUsenetDownloadStation": "lidarr_download_client_usenet_download_station",
+            "lidarr:DownloadClients/downloadClientUtorrent:DownloadClientUtorrent": "lidarr_download_client_utorrent",
+            "lidarr:DownloadClients/downloadClientVuze:DownloadClientVuze": "lidarr_download_client_vuze",
+            "lidarr:DownloadClients/remotePathMapping:RemotePathMapping": "lidarr_remote_path_mapping",
             "lidarr:ImportLists/importList:ImportList": "lidarr_import_list",
             "lidarr:ImportLists/importListExclusion:ImportListExclusion": "lidarr_import_list_exclusion",
             "lidarr:ImportLists/importListHeadphones:ImportListHeadphones": "lidarr_import_list_headphones",
@@ -91,11 +91,11 @@
         "functions": {
             "lidarr:Artists/getArtist:getArtist": "lidarr_artist",
             "lidarr:Artists/getArtists:getArtists": "lidarr_artists",
-            "lidarr:DownloadClient/getDownloadClient:getDownloadClient": "lidarr_download_client",
-            "lidarr:DownloadClient/getDownloadClientConfig:getDownloadClientConfig": "lidarr_download_client_config",
-            "lidarr:DownloadClient/getDownloadClients:getDownloadClients": "lidarr_download_clients",
-            "lidarr:DownloadClient/getRemotePathMapping:getRemotePathMapping": "lidarr_remote_path_mapping",
-            "lidarr:DownloadClient/getRemotePathMappings:getRemotePathMappings": "lidarr_remote_path_mappings",
+            "lidarr:DownloadClients/getDownloadClient:getDownloadClient": "lidarr_download_client",
+            "lidarr:DownloadClients/getDownloadClientConfig:getDownloadClientConfig": "lidarr_download_client_config",
+            "lidarr:DownloadClients/getDownloadClients:getDownloadClients": "lidarr_download_clients",
+            "lidarr:DownloadClients/getRemotePathMapping:getRemotePathMapping": "lidarr_remote_path_mapping",
+            "lidarr:DownloadClients/getRemotePathMappings:getRemotePathMappings": "lidarr_remote_path_mappings",
             "lidarr:ImportLists/getImportList:getImportList": "lidarr_import_list",
             "lidarr:ImportLists/getImportListExclusion:getImportListExclusion": "lidarr_import_list_exclusion",
             "lidarr:ImportLists/getImportListExclusions:getImportListExclusions": "lidarr_import_list_exclusions",
@@ -158,7 +158,7 @@
                 "metadataProfileId": "metadata_profile_id",
                 "qualityProfileId": "quality_profile_id"
             },
-            "lidarr:DownloadClient/downloadClient:DownloadClient": {
+            "lidarr:DownloadClients/downloadClient:DownloadClient": {
                 "addPaused": "add_paused",
                 "addStopped": "add_stopped",
                 "additionalTags": "additional_tags",
@@ -190,19 +190,19 @@
                 "useSsl": "use_ssl",
                 "watchFolder": "watch_folder"
             },
-            "lidarr:DownloadClient/downloadClientAria2:DownloadClientAria2": {
+            "lidarr:DownloadClients/downloadClientAria2:DownloadClientAria2": {
                 "removeCompletedDownloads": "remove_completed_downloads",
                 "removeFailedDownloads": "remove_failed_downloads",
                 "rpcPath": "rpc_path",
                 "secretToken": "secret_token",
                 "useSsl": "use_ssl"
             },
-            "lidarr:DownloadClient/downloadClientConfig:DownloadClientConfig": {
+            "lidarr:DownloadClients/downloadClientConfig:DownloadClientConfig": {
                 "autoRedownloadFailed": "auto_redownload_failed",
                 "downloadClientWorkingFolders": "download_client_working_folders",
                 "enableCompletedDownloadHandling": "enable_completed_download_handling"
             },
-            "lidarr:DownloadClient/downloadClientDeluge:DownloadClientDeluge": {
+            "lidarr:DownloadClients/downloadClientDeluge:DownloadClientDeluge": {
                 "addPaused": "add_paused",
                 "musicCategory": "music_category",
                 "musicImportedCategory": "music_imported_category",
@@ -213,7 +213,7 @@
                 "urlBase": "url_base",
                 "useSsl": "use_ssl"
             },
-            "lidarr:DownloadClient/downloadClientFlood:DownloadClientFlood": {
+            "lidarr:DownloadClients/downloadClientFlood:DownloadClientFlood": {
                 "addPaused": "add_paused",
                 "additionalTags": "additional_tags",
                 "fieldTags": "field_tags",
@@ -223,13 +223,13 @@
                 "urlBase": "url_base",
                 "useSsl": "use_ssl"
             },
-            "lidarr:DownloadClient/downloadClientHadouken:DownloadClientHadouken": {
+            "lidarr:DownloadClients/downloadClientHadouken:DownloadClientHadouken": {
                 "removeCompletedDownloads": "remove_completed_downloads",
                 "removeFailedDownloads": "remove_failed_downloads",
                 "urlBase": "url_base",
                 "useSsl": "use_ssl"
             },
-            "lidarr:DownloadClient/downloadClientNzbget:DownloadClientNzbget": {
+            "lidarr:DownloadClients/downloadClientNzbget:DownloadClientNzbget": {
                 "addPaused": "add_paused",
                 "musicCategory": "music_category",
                 "olderMusicPriority": "older_music_priority",
@@ -239,7 +239,7 @@
                 "urlBase": "url_base",
                 "useSsl": "use_ssl"
             },
-            "lidarr:DownloadClient/downloadClientNzbvortex:DownloadClientNzbvortex": {
+            "lidarr:DownloadClients/downloadClientNzbvortex:DownloadClientNzbvortex": {
                 "apiKey": "api_key",
                 "musicCategory": "music_category",
                 "olderMusicPriority": "older_music_priority",
@@ -248,13 +248,13 @@
                 "removeFailedDownloads": "remove_failed_downloads",
                 "urlBase": "url_base"
             },
-            "lidarr:DownloadClient/downloadClientPneumatic:DownloadClientPneumatic": {
+            "lidarr:DownloadClients/downloadClientPneumatic:DownloadClientPneumatic": {
                 "nzbFolder": "nzb_folder",
                 "removeCompletedDownloads": "remove_completed_downloads",
                 "removeFailedDownloads": "remove_failed_downloads",
                 "strmFolder": "strm_folder"
             },
-            "lidarr:DownloadClient/downloadClientQbittorrent:DownloadClientQbittorrent": {
+            "lidarr:DownloadClients/downloadClientQbittorrent:DownloadClientQbittorrent": {
                 "firstAndLast": "first_and_last",
                 "initialState": "initial_state",
                 "musicCategory": "music_category",
@@ -267,7 +267,7 @@
                 "urlBase": "url_base",
                 "useSsl": "use_ssl"
             },
-            "lidarr:DownloadClient/downloadClientRtorrent:DownloadClientRtorrent": {
+            "lidarr:DownloadClients/downloadClientRtorrent:DownloadClientRtorrent": {
                 "addStopped": "add_stopped",
                 "musicCategory": "music_category",
                 "musicDirectory": "music_directory",
@@ -279,7 +279,7 @@
                 "urlBase": "url_base",
                 "useSsl": "use_ssl"
             },
-            "lidarr:DownloadClient/downloadClientSabnzbd:DownloadClientSabnzbd": {
+            "lidarr:DownloadClients/downloadClientSabnzbd:DownloadClientSabnzbd": {
                 "apiKey": "api_key",
                 "musicCategory": "music_category",
                 "olderMusicPriority": "older_music_priority",
@@ -289,7 +289,7 @@
                 "urlBase": "url_base",
                 "useSsl": "use_ssl"
             },
-            "lidarr:DownloadClient/downloadClientTorrentBlackhole:DownloadClientTorrentBlackhole": {
+            "lidarr:DownloadClients/downloadClientTorrentBlackhole:DownloadClientTorrentBlackhole": {
                 "magnetFileExtension": "magnet_file_extension",
                 "readOnly": "read_only",
                 "removeCompletedDownloads": "remove_completed_downloads",
@@ -298,14 +298,14 @@
                 "torrentFolder": "torrent_folder",
                 "watchFolder": "watch_folder"
             },
-            "lidarr:DownloadClient/downloadClientTorrentDownloadStation:DownloadClientTorrentDownloadStation": {
+            "lidarr:DownloadClients/downloadClientTorrentDownloadStation:DownloadClientTorrentDownloadStation": {
                 "musicCategory": "music_category",
                 "musicDirectory": "music_directory",
                 "removeCompletedDownloads": "remove_completed_downloads",
                 "removeFailedDownloads": "remove_failed_downloads",
                 "useSsl": "use_ssl"
             },
-            "lidarr:DownloadClient/downloadClientTransmission:DownloadClientTransmission": {
+            "lidarr:DownloadClients/downloadClientTransmission:DownloadClientTransmission": {
                 "addPaused": "add_paused",
                 "musicCategory": "music_category",
                 "musicDirectory": "music_directory",
@@ -316,20 +316,20 @@
                 "urlBase": "url_base",
                 "useSsl": "use_ssl"
             },
-            "lidarr:DownloadClient/downloadClientUsenetBlackhole:DownloadClientUsenetBlackhole": {
+            "lidarr:DownloadClients/downloadClientUsenetBlackhole:DownloadClientUsenetBlackhole": {
                 "nzbFolder": "nzb_folder",
                 "removeCompletedDownloads": "remove_completed_downloads",
                 "removeFailedDownloads": "remove_failed_downloads",
                 "watchFolder": "watch_folder"
             },
-            "lidarr:DownloadClient/downloadClientUsenetDownloadStation:DownloadClientUsenetDownloadStation": {
+            "lidarr:DownloadClients/downloadClientUsenetDownloadStation:DownloadClientUsenetDownloadStation": {
                 "musicCategory": "music_category",
                 "musicDirectory": "music_directory",
                 "removeCompletedDownloads": "remove_completed_downloads",
                 "removeFailedDownloads": "remove_failed_downloads",
                 "useSsl": "use_ssl"
             },
-            "lidarr:DownloadClient/downloadClientUtorrent:DownloadClientUtorrent": {
+            "lidarr:DownloadClients/downloadClientUtorrent:DownloadClientUtorrent": {
                 "intialState": "intial_state",
                 "musicCategory": "music_category",
                 "musicImportedCategory": "music_imported_category",
@@ -340,7 +340,7 @@
                 "urlBase": "url_base",
                 "useSsl": "use_ssl"
             },
-            "lidarr:DownloadClient/downloadClientVuze:DownloadClientVuze": {
+            "lidarr:DownloadClients/downloadClientVuze:DownloadClientVuze": {
                 "addPaused": "add_paused",
                 "musicCategory": "music_category",
                 "musicDirectory": "music_directory",
@@ -351,7 +351,7 @@
                 "urlBase": "url_base",
                 "useSsl": "use_ssl"
             },
-            "lidarr:DownloadClient/getDownloadClient:getDownloadClient": {
+            "lidarr:DownloadClients/getDownloadClient:getDownloadClient": {
                 "addPaused": "add_paused",
                 "addStopped": "add_stopped",
                 "additionalTags": "additional_tags",
@@ -383,15 +383,15 @@
                 "useSsl": "use_ssl",
                 "watchFolder": "watch_folder"
             },
-            "lidarr:DownloadClient/getDownloadClientConfig:getDownloadClientConfig": {
+            "lidarr:DownloadClients/getDownloadClientConfig:getDownloadClientConfig": {
                 "autoRedownloadFailed": "auto_redownload_failed",
                 "downloadClientWorkingFolders": "download_client_working_folders",
                 "enableCompletedDownloadHandling": "enable_completed_download_handling"
             },
-            "lidarr:DownloadClient/getDownloadClients:getDownloadClients": {
+            "lidarr:DownloadClients/getDownloadClients:getDownloadClients": {
                 "downloadClients": "download_clients"
             },
-            "lidarr:DownloadClient/getDownloadClientsDownloadClient:getDownloadClientsDownloadClient": {
+            "lidarr:DownloadClients/getDownloadClientsDownloadClient:getDownloadClientsDownloadClient": {
                 "addPaused": "add_paused",
                 "addStopped": "add_stopped",
                 "additionalTags": "additional_tags",
@@ -423,18 +423,18 @@
                 "useSsl": "use_ssl",
                 "watchFolder": "watch_folder"
             },
-            "lidarr:DownloadClient/getRemotePathMapping:getRemotePathMapping": {
+            "lidarr:DownloadClients/getRemotePathMapping:getRemotePathMapping": {
                 "localPath": "local_path",
                 "remotePath": "remote_path"
             },
-            "lidarr:DownloadClient/getRemotePathMappings:getRemotePathMappings": {
+            "lidarr:DownloadClients/getRemotePathMappings:getRemotePathMappings": {
                 "remotePathMappings": "remote_path_mappings"
             },
-            "lidarr:DownloadClient/getRemotePathMappingsRemotePathMapping:getRemotePathMappingsRemotePathMapping": {
+            "lidarr:DownloadClients/getRemotePathMappingsRemotePathMapping:getRemotePathMappingsRemotePathMapping": {
                 "localPath": "local_path",
                 "remotePath": "remote_path"
             },
-            "lidarr:DownloadClient/remotePathMapping:RemotePathMapping": {
+            "lidarr:DownloadClients/remotePathMapping:RemotePathMapping": {
                 "localPath": "local_path",
                 "remotePath": "remote_path"
             },

@@ -5,8 +5,8 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 /**
- * <!-- subcategory:Download Clients -->Download Client Hadouken resource.
- * For more information refer to [Download Client](https://wiki.servarr.com/lidarr/settings#download-clients) and [Hadouken](https://wiki.servarr.com/lidarr/supported#hadouken).
+ * <!-- subcategory:Download Clients -->Download Client Deluge resource.
+ * For more information refer to [Download Client](https://wiki.servarr.com/lidarr/settings#download-clients) and [Deluge](https://wiki.servarr.com/lidarr/supported#deluge).
  *
  * ## Example Usage
  *
@@ -14,15 +14,13 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as lidarr from "@maienm/pulumi-lidarr";
  *
- * const example = new lidarr.downloadclient.DownloadClientHadouken("example", {
+ * const example = new lidarr.downloadclients.DownloadClientDeluge("example", {
  *     enable: true,
- *     host: "hadouken",
+ *     host: "deluge",
  *     name: "Example",
- *     password: "password",
  *     port: 9091,
  *     priority: 1,
- *     urlBase: "/hadouken/",
- *     username: "username",
+ *     urlBase: "/deluge/",
  * });
  * ```
  *
@@ -31,12 +29,12 @@ import * as utilities from "../utilities";
  * import using the API/UI ID
  *
  * ```sh
- *  $ pulumi import lidarr:DownloadClient/downloadClientHadouken:DownloadClientHadouken example 1
+ *  $ pulumi import lidarr:DownloadClients/downloadClientDeluge:DownloadClientDeluge example 1
  * ```
  */
-export class DownloadClientHadouken extends pulumi.CustomResource {
+export class DownloadClientDeluge extends pulumi.CustomResource {
     /**
-     * Get an existing DownloadClientHadouken resource's state with the given name, ID, and optional extra
+     * Get an existing DownloadClientDeluge resource's state with the given name, ID, and optional extra
      * properties used to qualify the lookup.
      *
      * @param name The _unique_ name of the resulting resource.
@@ -44,28 +42,28 @@ export class DownloadClientHadouken extends pulumi.CustomResource {
      * @param state Any extra arguments used during the lookup.
      * @param opts Optional settings to control the behavior of the CustomResource.
      */
-    public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: DownloadClientHadoukenState, opts?: pulumi.CustomResourceOptions): DownloadClientHadouken {
-        return new DownloadClientHadouken(name, <any>state, { ...opts, id: id });
+    public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: DownloadClientDelugeState, opts?: pulumi.CustomResourceOptions): DownloadClientDeluge {
+        return new DownloadClientDeluge(name, <any>state, { ...opts, id: id });
     }
 
     /** @internal */
-    public static readonly __pulumiType = 'lidarr:DownloadClient/downloadClientHadouken:DownloadClientHadouken';
+    public static readonly __pulumiType = 'lidarr:DownloadClients/downloadClientDeluge:DownloadClientDeluge';
 
     /**
-     * Returns true if the given object is an instance of DownloadClientHadouken.  This is designed to work even
+     * Returns true if the given object is an instance of DownloadClientDeluge.  This is designed to work even
      * when multiple copies of the Pulumi SDK have been loaded into the same process.
      */
-    public static isInstance(obj: any): obj is DownloadClientHadouken {
+    public static isInstance(obj: any): obj is DownloadClientDeluge {
         if (obj === undefined || obj === null) {
             return false;
         }
-        return obj['__pulumiType'] === DownloadClientHadouken.__pulumiType;
+        return obj['__pulumiType'] === DownloadClientDeluge.__pulumiType;
     }
 
     /**
-     * Category.
+     * Add paused flag.
      */
-    public readonly category!: pulumi.Output<string>;
+    public readonly addPaused!: pulumi.Output<boolean>;
     /**
      * Enable flag.
      */
@@ -75,9 +73,21 @@ export class DownloadClientHadouken extends pulumi.CustomResource {
      */
     public readonly host!: pulumi.Output<string>;
     /**
+     * Music category.
+     */
+    public readonly musicCategory!: pulumi.Output<string>;
+    /**
+     * Music imported category.
+     */
+    public readonly musicImportedCategory!: pulumi.Output<string>;
+    /**
      * Download Client name.
      */
     public readonly name!: pulumi.Output<string>;
+    /**
+     * Older Music priority. `0` Last, `1` First.
+     */
+    public readonly olderMusicPriority!: pulumi.Output<number>;
     /**
      * Password.
      */
@@ -90,6 +100,10 @@ export class DownloadClientHadouken extends pulumi.CustomResource {
      * Priority.
      */
     public readonly priority!: pulumi.Output<number>;
+    /**
+     * Recent Music priority. `0` Last, `1` First.
+     */
+    public readonly recentMusicPriority!: pulumi.Output<number>;
     /**
      * Remove completed downloads flag.
      */
@@ -110,77 +124,73 @@ export class DownloadClientHadouken extends pulumi.CustomResource {
      * Use SSL flag.
      */
     public readonly useSsl!: pulumi.Output<boolean>;
-    /**
-     * Username.
-     */
-    public readonly username!: pulumi.Output<string>;
 
     /**
-     * Create a DownloadClientHadouken resource with the given unique name, arguments, and options.
+     * Create a DownloadClientDeluge resource with the given unique name, arguments, and options.
      *
      * @param name The _unique_ name of the resource.
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args: DownloadClientHadoukenArgs, opts?: pulumi.CustomResourceOptions)
-    constructor(name: string, argsOrState?: DownloadClientHadoukenArgs | DownloadClientHadoukenState, opts?: pulumi.CustomResourceOptions) {
+    constructor(name: string, args: DownloadClientDelugeArgs, opts?: pulumi.CustomResourceOptions)
+    constructor(name: string, argsOrState?: DownloadClientDelugeArgs | DownloadClientDelugeState, opts?: pulumi.CustomResourceOptions) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {
-            const state = argsOrState as DownloadClientHadoukenState | undefined;
-            resourceInputs["category"] = state ? state.category : undefined;
+            const state = argsOrState as DownloadClientDelugeState | undefined;
+            resourceInputs["addPaused"] = state ? state.addPaused : undefined;
             resourceInputs["enable"] = state ? state.enable : undefined;
             resourceInputs["host"] = state ? state.host : undefined;
+            resourceInputs["musicCategory"] = state ? state.musicCategory : undefined;
+            resourceInputs["musicImportedCategory"] = state ? state.musicImportedCategory : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
+            resourceInputs["olderMusicPriority"] = state ? state.olderMusicPriority : undefined;
             resourceInputs["password"] = state ? state.password : undefined;
             resourceInputs["port"] = state ? state.port : undefined;
             resourceInputs["priority"] = state ? state.priority : undefined;
+            resourceInputs["recentMusicPriority"] = state ? state.recentMusicPriority : undefined;
             resourceInputs["removeCompletedDownloads"] = state ? state.removeCompletedDownloads : undefined;
             resourceInputs["removeFailedDownloads"] = state ? state.removeFailedDownloads : undefined;
             resourceInputs["tags"] = state ? state.tags : undefined;
             resourceInputs["urlBase"] = state ? state.urlBase : undefined;
             resourceInputs["useSsl"] = state ? state.useSsl : undefined;
-            resourceInputs["username"] = state ? state.username : undefined;
         } else {
-            const args = argsOrState as DownloadClientHadoukenArgs | undefined;
+            const args = argsOrState as DownloadClientDelugeArgs | undefined;
             if ((!args || args.name === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'name'");
             }
-            if ((!args || args.password === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'password'");
-            }
-            if ((!args || args.username === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'username'");
-            }
-            resourceInputs["category"] = args ? args.category : undefined;
+            resourceInputs["addPaused"] = args ? args.addPaused : undefined;
             resourceInputs["enable"] = args ? args.enable : undefined;
             resourceInputs["host"] = args ? args.host : undefined;
+            resourceInputs["musicCategory"] = args ? args.musicCategory : undefined;
+            resourceInputs["musicImportedCategory"] = args ? args.musicImportedCategory : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["olderMusicPriority"] = args ? args.olderMusicPriority : undefined;
             resourceInputs["password"] = args?.password ? pulumi.secret(args.password) : undefined;
             resourceInputs["port"] = args ? args.port : undefined;
             resourceInputs["priority"] = args ? args.priority : undefined;
+            resourceInputs["recentMusicPriority"] = args ? args.recentMusicPriority : undefined;
             resourceInputs["removeCompletedDownloads"] = args ? args.removeCompletedDownloads : undefined;
             resourceInputs["removeFailedDownloads"] = args ? args.removeFailedDownloads : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
             resourceInputs["urlBase"] = args ? args.urlBase : undefined;
             resourceInputs["useSsl"] = args ? args.useSsl : undefined;
-            resourceInputs["username"] = args ? args.username : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         const secretOpts = { additionalSecretOutputs: ["password"] };
         opts = pulumi.mergeOptions(opts, secretOpts);
-        super(DownloadClientHadouken.__pulumiType, name, resourceInputs, opts);
+        super(DownloadClientDeluge.__pulumiType, name, resourceInputs, opts);
     }
 }
 
 /**
- * Input properties used for looking up and filtering DownloadClientHadouken resources.
+ * Input properties used for looking up and filtering DownloadClientDeluge resources.
  */
-export interface DownloadClientHadoukenState {
+export interface DownloadClientDelugeState {
     /**
-     * Category.
+     * Add paused flag.
      */
-    category?: pulumi.Input<string>;
+    addPaused?: pulumi.Input<boolean>;
     /**
      * Enable flag.
      */
@@ -190,9 +200,21 @@ export interface DownloadClientHadoukenState {
      */
     host?: pulumi.Input<string>;
     /**
+     * Music category.
+     */
+    musicCategory?: pulumi.Input<string>;
+    /**
+     * Music imported category.
+     */
+    musicImportedCategory?: pulumi.Input<string>;
+    /**
      * Download Client name.
      */
     name?: pulumi.Input<string>;
+    /**
+     * Older Music priority. `0` Last, `1` First.
+     */
+    olderMusicPriority?: pulumi.Input<number>;
     /**
      * Password.
      */
@@ -206,6 +228,10 @@ export interface DownloadClientHadoukenState {
      */
     priority?: pulumi.Input<number>;
     /**
+     * Recent Music priority. `0` Last, `1` First.
+     */
+    recentMusicPriority?: pulumi.Input<number>;
+    /**
      * Remove completed downloads flag.
      */
     removeCompletedDownloads?: pulumi.Input<boolean>;
@@ -225,20 +251,16 @@ export interface DownloadClientHadoukenState {
      * Use SSL flag.
      */
     useSsl?: pulumi.Input<boolean>;
-    /**
-     * Username.
-     */
-    username?: pulumi.Input<string>;
 }
 
 /**
- * The set of arguments for constructing a DownloadClientHadouken resource.
+ * The set of arguments for constructing a DownloadClientDeluge resource.
  */
-export interface DownloadClientHadoukenArgs {
+export interface DownloadClientDelugeArgs {
     /**
-     * Category.
+     * Add paused flag.
      */
-    category?: pulumi.Input<string>;
+    addPaused?: pulumi.Input<boolean>;
     /**
      * Enable flag.
      */
@@ -248,13 +270,25 @@ export interface DownloadClientHadoukenArgs {
      */
     host?: pulumi.Input<string>;
     /**
+     * Music category.
+     */
+    musicCategory?: pulumi.Input<string>;
+    /**
+     * Music imported category.
+     */
+    musicImportedCategory?: pulumi.Input<string>;
+    /**
      * Download Client name.
      */
     name: pulumi.Input<string>;
     /**
+     * Older Music priority. `0` Last, `1` First.
+     */
+    olderMusicPriority?: pulumi.Input<number>;
+    /**
      * Password.
      */
-    password: pulumi.Input<string>;
+    password?: pulumi.Input<string>;
     /**
      * Port.
      */
@@ -263,6 +297,10 @@ export interface DownloadClientHadoukenArgs {
      * Priority.
      */
     priority?: pulumi.Input<number>;
+    /**
+     * Recent Music priority. `0` Last, `1` First.
+     */
+    recentMusicPriority?: pulumi.Input<number>;
     /**
      * Remove completed downloads flag.
      */
@@ -283,8 +321,4 @@ export interface DownloadClientHadoukenArgs {
      * Use SSL flag.
      */
     useSsl?: pulumi.Input<boolean>;
-    /**
-     * Username.
-     */
-    username: pulumi.Input<string>;
 }

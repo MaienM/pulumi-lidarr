@@ -14,7 +14,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as lidarr from "@maienm/pulumi-lidarr";
  *
- * const example = new lidarr.downloadclient.DownloadClientQbittorrent("example", {
+ * const example = new lidarr.downloadclients.DownloadClientQbittorrent("example", {
  *     enable: true,
  *     firstAndLast: true,
  *     host: "qbittorrent",
@@ -31,7 +31,7 @@ import * as utilities from "../utilities";
  * import using the API/UI ID
  *
  * ```sh
- *  $ pulumi import lidarr:DownloadClient/downloadClientQbittorrent:DownloadClientQbittorrent example 1
+ *  $ pulumi import lidarr:DownloadClients/downloadClientQbittorrent:DownloadClientQbittorrent example 1
  * ```
  */
 export class DownloadClientQbittorrent extends pulumi.CustomResource {
@@ -49,7 +49,7 @@ export class DownloadClientQbittorrent extends pulumi.CustomResource {
     }
 
     /** @internal */
-    public static readonly __pulumiType = 'lidarr:DownloadClient/downloadClientQbittorrent:DownloadClientQbittorrent';
+    public static readonly __pulumiType = 'lidarr:DownloadClients/downloadClientQbittorrent:DownloadClientQbittorrent';
 
     /**
      * Returns true if the given object is an instance of DownloadClientQbittorrent.  This is designed to work even
