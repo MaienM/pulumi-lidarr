@@ -21,15 +21,15 @@ import (
 	"strings"
 	"unicode"
 
+	"github.com/MaienM/pulumi-lidarr/provider/pkg/version"
+	shimprovider "github.com/devopsarr/terraform-provider-lidarr/shim"
 	"github.com/ettle/strcase"
+	pf "github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge"
+	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
+	shim "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim"
+	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/util/contract"
-	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
-	shim "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim"
-	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
-	shimprovider "github.com/devopsarr/terraform-provider-lidarr/shim"
-	pf "github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge"
-	"github.com/MaienM/pulumi-lidarr/provider/pkg/version"
 )
 
 //go:embed cmd/pulumi-resource-lidarr/bridge-metadata.json
@@ -47,9 +47,35 @@ type NameOverride struct {
 }
 
 var prefix_module_map = map[string]string{
+	"artist":       "Artists",
+	"import_list":  "ImportLists",
+	"indexer":      "Indexers",
+	"metadata":     "Metadata",
+	"notification": "Notifications",
+	"system":       "System",
+	"tag":          "Tags",
+
+	"media_management": "MediaManagement",
+	"root_folder":      "MediaManagement",
+
+	"download_client":     "DownloadClients",
+	"remote_path_mapping": "DownloadClients",
+
+	"custom_format":        "Profiles",
+	"delay_profile":        "Profiles",
+	"metadata_profile":     "Profiles",
+	"primary_album_type":   "Profiles",
+	"quality_definition":   "Profiles",
+	"quality_profile":      "Profiles",
+	"release_profile":      "Profiles",
+	"release_status":       "Profiles",
+	"secondary_album_type": "Profiles",
 }
 
 var overrides = map[string]NameOverride{
+	"host":    {"System", "Host"},
+	"naming":  {"MediaManagement", "Naming"},
+	"quality": {"Profiles", "Quality"},
 }
 
 func convertName(tfname string) (module string, name string) {
@@ -112,7 +138,7 @@ func preConfigureCallback(vars resource.PropertyMap, c shim.ResourceConfig) erro
 // Provider returns additional overlaid schema and metadata associated with the provider..
 func Provider() tfbridge.ProviderInfo {
 	// Instantiate the Terraform provider
-	p := pf.ShimProvider(shimprovider.NewProvider())
+	p := pf.ShimProvider(shimprovider.NewProvider(version.Version))
 
 	// Create a Pulumi provider mapping
 	prov := tfbridge.ProviderInfo{
@@ -140,7 +166,7 @@ func Provider() tfbridge.ProviderInfo {
 		// category/cloud tag helps with categorizing the package in the Pulumi Registry.
 		// For all available categories, see `Keywords` in
 		// https://www.pulumi.com/docs/guides/pulumi-packages/schema/#package.
-		Keywords:   []string{
+		Keywords: []string{
 			"pulumi",
 			"lidarr",
 			"category/utility",
@@ -150,11 +176,11 @@ func Provider() tfbridge.ProviderInfo {
 		Repository: "https://github.com/MaienM/pulumi-lidarr",
 		// The GitHub Org for the provider - defaults to `terraform-providers`. Note that this
 		// should match the TF provider module's require directive, not any replace directives.
-		Version:   version.Version,
-		GitHubOrg: "devopsarr",
-		MetadataInfo: tfbridge.NewProviderMetadata(bridgeMetadata),
+		Version:           version.Version,
+		GitHubOrg:         "devopsarr",
+		MetadataInfo:      tfbridge.NewProviderMetadata(bridgeMetadata),
 		TFProviderVersion: "1.11.0",
-		Config:    map[string]*tfbridge.SchemaInfo{
+		Config:            map[string]*tfbridge.SchemaInfo{
 			// Add any required configuration here, or remove the example below if
 			// no additional points are required.
 			// "region": {
@@ -170,7 +196,7 @@ func Provider() tfbridge.ProviderInfo {
 			//
 			// "aws_iam_role": {
 			//   Tok: makeResource(mainMod, "aws_iam_role"),
-		  // },
+			// },
 		},
 		DataSources: map[string]*tfbridge.DataSourceInfo{
 			// Map each data source in the Terraform provider to a Pulumi function.
