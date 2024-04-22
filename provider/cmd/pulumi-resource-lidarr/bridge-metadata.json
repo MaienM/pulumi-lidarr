@@ -109,8 +109,6 @@
             "lidarr:Metadata/getConfig:getConfig": "lidarr_metadata_config",
             "lidarr:Metadata/getConsumers:getConsumers": "lidarr_metadata_consumers",
             "lidarr:Metadata/getMetadata:getMetadata": "lidarr_metadata",
-            "lidarr:Metadata/getProfile:getProfile": "lidarr_metadata_profile",
-            "lidarr:Metadata/getProfiles:getProfiles": "lidarr_metadata_profiles",
             "lidarr:Notifications/getNotification:getNotification": "lidarr_notification",
             "lidarr:Notifications/getNotifications:getNotifications": "lidarr_notifications",
             "lidarr:Profiles/getCondition:getCondition": "lidarr_custom_format_condition",
@@ -121,6 +119,8 @@
             "lidarr:Profiles/getCustomFormats:getCustomFormats": "lidarr_custom_formats",
             "lidarr:Profiles/getDelayProfile:getDelayProfile": "lidarr_delay_profile",
             "lidarr:Profiles/getDelayProfiles:getDelayProfiles": "lidarr_delay_profiles",
+            "lidarr:Profiles/getMetadataProfile:getMetadataProfile": "lidarr_metadata_profile",
+            "lidarr:Profiles/getMetadataProfiles:getMetadataProfiles": "lidarr_metadata_profiles",
             "lidarr:Profiles/getPrimaryAlbumType:getPrimaryAlbumType": "lidarr_primary_album_type",
             "lidarr:Profiles/getPrimaryAlbumTypes:getPrimaryAlbumTypes": "lidarr_primary_album_types",
             "lidarr:Profiles/getQuality:getQuality": "lidarr_quality",
@@ -925,19 +925,6 @@
                 "configContract": "config_contract",
                 "trackMetadata": "track_metadata"
             },
-            "lidarr:Metadata/getProfile:getProfile": {
-                "primaryAlbumTypes": "primary_album_types",
-                "releaseStatuses": "release_statuses",
-                "secondaryAlbumTypes": "secondary_album_types"
-            },
-            "lidarr:Metadata/getProfiles:getProfiles": {
-                "metadataProfiles": "metadata_profiles"
-            },
-            "lidarr:Metadata/getProfilesMetadataProfile:getProfilesMetadataProfile": {
-                "primaryAlbumTypes": "primary_album_types",
-                "releaseStatuses": "release_statuses",
-                "secondaryAlbumTypes": "secondary_album_types"
-            },
             "lidarr:Metadata/kodi:Kodi": {
                 "albumImages": "album_images",
                 "albumMetadata": "album_metadata",
@@ -1534,6 +1521,19 @@
                 "preferredProtocol": "preferred_protocol",
                 "torrentDelay": "torrent_delay",
                 "usenetDelay": "usenet_delay"
+            },
+            "lidarr:Profiles/getMetadataProfile:getMetadataProfile": {
+                "primaryAlbumTypes": "primary_album_types",
+                "releaseStatuses": "release_statuses",
+                "secondaryAlbumTypes": "secondary_album_types"
+            },
+            "lidarr:Profiles/getMetadataProfiles:getMetadataProfiles": {
+                "metadataProfiles": "metadata_profiles"
+            },
+            "lidarr:Profiles/getMetadataProfilesMetadataProfile:getMetadataProfilesMetadataProfile": {
+                "primaryAlbumTypes": "primary_album_types",
+                "releaseStatuses": "release_statuses",
+                "secondaryAlbumTypes": "secondary_album_types"
             },
             "lidarr:Profiles/getQualityDefinition:getQualityDefinition": {
                 "maxSize": "max_size",

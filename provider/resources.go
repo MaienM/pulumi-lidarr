@@ -18,6 +18,7 @@ import (
 	_ "embed"
 	"fmt"
 	"path/filepath"
+	"sort"
 	"strings"
 	"unicode"
 
@@ -86,16 +87,23 @@ func convertName(tfname string) (module string, name string) {
 		module = v.Module
 		name = v.Name
 	} else {
-		for modnameSnake, modname := range prefix_module_map {
-			if tfname == modnameSnake || tfname == modnameSnake+"s" || tfname == modnameSnake+"es" {
-				module = modname
+		keys := make([]string, 0)
+		for modnameSnake := range prefix_module_map {
+			keys = append(keys, modnameSnake)
+		}
+		sort.Slice(keys, func(i, j int) bool {
+			return len(keys[i]) < len(keys[j])
+		})
+
+		for _, prefix := range keys {
+			if tfname == prefix || tfname == prefix+"s" || tfname == prefix+"es" {
 				name = strcase.ToPascal(tfname)
-				break
-			} else if strings.HasPrefix(tfname, modnameSnake+"_") {
-				module = modname
-				name = strcase.ToPascal(strings.TrimPrefix(tfname, modnameSnake+"_"))
-				break
+			} else if strings.HasPrefix(tfname, prefix+"_") {
+				name = strcase.ToPascal(strings.TrimPrefix(tfname, prefix+"_"))
+			} else {
+				continue
 			}
+			module = prefix_module_map[prefix]
 		}
 		contract.Assertf(len(module) > 0, "Name does not match any of the module names prefixes: %s", tfname)
 	}

@@ -3,6 +3,7 @@ module github.com/MaienM/pulumi-lidarr/sdk
 go 1.21
 
 require (
+	github.com/MaienM/pulumi-lidarr/sdk/v2 v2.0.0-00010101000000-000000000000
 	github.com/blang/semver v3.5.1+incompatible
 	github.com/pulumi/pulumi/sdk/v3 v3.104.2
 )
@@ -89,3 +90,5 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	lukechampine.com/frand v1.4.2 // indirect
 )
+
+replace github.com/MaienM/pulumi-lidarr/sdk/v2 => ./
