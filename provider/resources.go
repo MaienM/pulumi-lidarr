@@ -48,7 +48,35 @@ type NameOverride struct {
 	Name   string
 }
 
-var prefix_module_map = map[string]string{}
+var prefix_module_map = map[string]string{
+	"artist":       "Artists",
+	"import_list":  "ImportLists",
+	"indexer":      "Indexers",
+	"metadata":     "Metadata",
+	"notification": "Notifications",
+	"tag":          "Tags",
+
+	"download_client":     "DownloadClients",
+	"remote_path_mapping": "DownloadClients",
+
+	"media_management": "MediaManagement",
+	"naming":           "MediaManagement",
+	"root_folder":      "MediaManagement",
+
+	"custom_format":        "Profiles",
+	"delay_profile":        "Profiles",
+	"metadata_profile":     "Profiles",
+	"primary_album_type":   "Profiles",
+	"quality":              "Profiles",
+	"quality_definition":   "Profiles",
+	"quality_profile":      "Profiles",
+	"release_profile":      "Profiles",
+	"release_status":       "Profiles",
+	"secondary_album_type": "Profiles",
+
+	"host":   "System",
+	"system": "System",
+}
 
 var overrides = map[string]NameOverride{}
 
